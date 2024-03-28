@@ -108,7 +108,7 @@ describe('/memories', () => {
       expect(body.assets).toHaveLength(2);
     });
 
-    it('should create a new memory and ignore assets the user does have access to', async () => {
+    it('should create a new memory and ignore assets the user does not have access to', async () => {
       const { status, body } = await request(app)
         .post('/memories')
         .set('Authorization', `Bearer ${user.accessToken}`)
