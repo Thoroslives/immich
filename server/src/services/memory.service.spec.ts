@@ -155,7 +155,7 @@ describe(MemoryService.name, () => {
       expect(memoryMock.addAssetIds).not.toHaveBeenCalled();
     });
 
-    it('should skips assets already in the memory', async () => {
+    it('should skip assets already in the memory', async () => {
       accessMock.memory.checkOwnerAccess.mockResolvedValue(new Set(['memory1']));
       memoryMock.get.mockResolvedValue(memoryStub.memory1);
       memoryMock.getAssetIds.mockResolvedValue(new Set(['asset1']));
