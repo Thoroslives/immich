@@ -184,7 +184,7 @@ describe(MemoryService.name, () => {
       expect(memoryMock.removeAssetIds).not.toHaveBeenCalled();
     });
 
-    it('should skips assets not in the memory', async () => {
+    it('should skip assets not in the memory', async () => {
       accessMock.memory.checkOwnerAccess.mockResolvedValue(new Set(['memory1']));
       await expect(sut.removeAssets(authStub.admin, 'memory1', { ids: ['not-found'] })).resolves.toEqual([
         { error: 'not_found', id: 'not-found', success: false },
