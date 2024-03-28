@@ -16,6 +16,7 @@ import { ApiKeyRepository } from 'src/repositories/api-key.repository';
 import { AssetRepository } from 'src/repositories/asset.repository';
 import { AuditRepository } from 'src/repositories/audit.repository';
 import { LibraryRepository } from 'src/repositories/library.repository';
+import { MemoryRepository } from 'src/repositories/memory.repository';
 import { MoveRepository } from 'src/repositories/move.repository';
 import { PartnerRepository } from 'src/repositories/partner.repository';
 import { PersonRepository } from 'src/repositories/person.repository';
@@ -59,6 +60,7 @@ const repositories = [
   AssetRepository,
   AuditRepository,
   LibraryRepository,
+  MemoryRepository,
   MoveRepository,
   PartnerRepository,
   PersonRepository,
