@@ -114,12 +114,12 @@ class AssetApiRepository extends ApiRepository {
             return null;
           }
 
-          return AssetEditActionListDtoEditsInner(action: edit.action.toDto()!, parameters: edit.parameters);
+          return AssetEditActionItemDto(action: edit.action.toDto()!, parameters: edit.parameters);
         })
-        .whereType<AssetEditActionListDtoEditsInner>()
+        .whereType<AssetEditActionItemDto>()
         .toList();
 
-    await _api.editAsset(assetId, AssetEditActionListDto(edits: editDtos));
+    await _api.editAsset(assetId, AssetEditsCreateDto(edits: editDtos));
   }
 
   Future<void> removeEdits(String assetId) async {
