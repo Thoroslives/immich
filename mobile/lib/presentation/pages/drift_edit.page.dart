@@ -237,11 +237,14 @@ class _DriftEditImagePageState extends ConsumerState<DriftEditImagePage> with Ti
             title: Text('editor_discard_edits_title'.tr()),
             content: Text('editor_discard_edits_prompt'.tr()),
             actions: [
-              TextButton(onPressed: () => Navigator.of(context).pop(false), child: Text('cancel'.tr())),
               TextButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                child: Text('editor_discard_edits_confirm'.tr()),
+                onPressed: () => Navigator.of(context).pop(false),
+                style: ButtonStyle(
+                  foregroundColor: WidgetStateProperty.all(context.themeData.colorScheme.onSurfaceVariant),
+                ),
+                child: Text('cancel'.tr()),
               ),
+              TextButton(onPressed: () => Navigator.of(context).pop(true), child: Text('confirm'.tr())),
             ],
           ),
         ) ??
@@ -456,7 +459,7 @@ class _AspectRatioButton extends StatelessWidget {
           ),
           onPressed: onPressed,
         ),
-        Text(label.tr(), style: context.textTheme.displayMedium),
+        Text(label, style: context.textTheme.displayMedium),
       ],
     );
   }
