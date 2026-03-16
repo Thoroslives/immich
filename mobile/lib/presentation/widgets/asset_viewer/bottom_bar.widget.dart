@@ -12,7 +12,9 @@ import 'package:immich_mobile/presentation/widgets/action_buttons/upload_action_
 import 'package:immich_mobile/providers/asset_viewer/asset_viewer.provider.dart';
 import 'package:immich_mobile/providers/infrastructure/readonly_mode.provider.dart';
 import 'package:immich_mobile/providers/routes.provider.dart';
+import 'package:immich_mobile/providers/server_info.provider.dart';
 import 'package:immich_mobile/providers/user.provider.dart';
+import 'package:immich_mobile/utils/semver.dart';
 import 'package:immich_mobile/widgets/asset_viewer/video_controls.dart';
 
 class ViewerBottomBar extends ConsumerWidget {
@@ -30,6 +32,7 @@ class ViewerBottomBar extends ConsumerWidget {
     final isOwner = asset is RemoteAsset && asset.ownerId == user?.id;
     final showingDetails = ref.watch(assetViewerProvider.select((s) => s.showingDetails));
     final isInLockedView = ref.watch(inLockedViewProvider);
+    final serverInfo = ref.watch(serverInfoProvider);
 
     final originalTheme = context.themeData;
 
@@ -38,7 +41,9 @@ class ViewerBottomBar extends ConsumerWidget {
 
       if (!isInLockedView) ...[
         if (asset.isLocalOnly) const UploadActionButton(source: ActionSource.viewer),
-        if (asset.isEditable) const EditImageActionButton(),
+        // edit sync was added in 2.6.0
+        if (asset.isEditable && serverInfo.serverVersion >= const SemVer(major: 2, minor: 6, patch: 0))
+          const EditImageActionButton(),
         if (asset.hasRemote) AddActionButton(originalTheme: originalTheme),
 
         if (isOwner) ...[
