@@ -42,7 +42,7 @@ class SessionUpdateDto {
     if (this.isPendingSyncReset != null) {
       json[r'isPendingSyncReset'] = this.isPendingSyncReset;
     } else {
-    //  json[r'isPendingSyncReset'] = null;
+      json[r'isPendingSyncReset'] = null;
     }
     return json;
   }
@@ -51,9 +51,15 @@ class SessionUpdateDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static SessionUpdateDto? fromJson(dynamic value) {
-    upgradeDto(value, "SessionUpdateDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return SessionUpdateDto(
         isPendingSyncReset: mapValueOfType<bool>(json, r'isPendingSyncReset'),

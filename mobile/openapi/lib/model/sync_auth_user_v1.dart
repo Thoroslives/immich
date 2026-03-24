@@ -106,12 +106,12 @@ class SyncAuthUserV1 {
     if (this.avatarColor != null) {
       json[r'avatarColor'] = this.avatarColor;
     } else {
-    //  json[r'avatarColor'] = null;
+      json[r'avatarColor'] = null;
     }
     if (this.deletedAt != null) {
       json[r'deletedAt'] = this.deletedAt!.toUtc().toIso8601String();
     } else {
-    //  json[r'deletedAt'] = null;
+      json[r'deletedAt'] = null;
     }
       json[r'email'] = this.email;
       json[r'hasProfileImage'] = this.hasProfileImage;
@@ -122,19 +122,19 @@ class SyncAuthUserV1 {
     if (this.pinCode != null) {
       json[r'pinCode'] = this.pinCode;
     } else {
-    //  json[r'pinCode'] = null;
+      json[r'pinCode'] = null;
     }
       json[r'profileChangedAt'] = this.profileChangedAt.toUtc().toIso8601String();
     if (this.quotaSizeInBytes != null) {
       json[r'quotaSizeInBytes'] = this.quotaSizeInBytes;
     } else {
-    //  json[r'quotaSizeInBytes'] = null;
+      json[r'quotaSizeInBytes'] = null;
     }
       json[r'quotaUsageInBytes'] = this.quotaUsageInBytes;
     if (this.storageLabel != null) {
       json[r'storageLabel'] = this.storageLabel;
     } else {
-    //  json[r'storageLabel'] = null;
+      json[r'storageLabel'] = null;
     }
     return json;
   }
@@ -143,9 +143,36 @@ class SyncAuthUserV1 {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static SyncAuthUserV1? fromJson(dynamic value) {
-    upgradeDto(value, "SyncAuthUserV1");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'avatarColor'), 'Required key "SyncAuthUserV1[avatarColor]" is missing from JSON.');
+        assert(json.containsKey(r'deletedAt'), 'Required key "SyncAuthUserV1[deletedAt]" is missing from JSON.');
+        assert(json.containsKey(r'email'), 'Required key "SyncAuthUserV1[email]" is missing from JSON.');
+        assert(json[r'email'] != null, 'Required key "SyncAuthUserV1[email]" has a null value in JSON.');
+        assert(json.containsKey(r'hasProfileImage'), 'Required key "SyncAuthUserV1[hasProfileImage]" is missing from JSON.');
+        assert(json[r'hasProfileImage'] != null, 'Required key "SyncAuthUserV1[hasProfileImage]" has a null value in JSON.');
+        assert(json.containsKey(r'id'), 'Required key "SyncAuthUserV1[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "SyncAuthUserV1[id]" has a null value in JSON.');
+        assert(json.containsKey(r'isAdmin'), 'Required key "SyncAuthUserV1[isAdmin]" is missing from JSON.');
+        assert(json[r'isAdmin'] != null, 'Required key "SyncAuthUserV1[isAdmin]" has a null value in JSON.');
+        assert(json.containsKey(r'name'), 'Required key "SyncAuthUserV1[name]" is missing from JSON.');
+        assert(json[r'name'] != null, 'Required key "SyncAuthUserV1[name]" has a null value in JSON.');
+        assert(json.containsKey(r'oauthId'), 'Required key "SyncAuthUserV1[oauthId]" is missing from JSON.');
+        assert(json[r'oauthId'] != null, 'Required key "SyncAuthUserV1[oauthId]" has a null value in JSON.');
+        assert(json.containsKey(r'pinCode'), 'Required key "SyncAuthUserV1[pinCode]" is missing from JSON.');
+        assert(json.containsKey(r'profileChangedAt'), 'Required key "SyncAuthUserV1[profileChangedAt]" is missing from JSON.');
+        assert(json[r'profileChangedAt'] != null, 'Required key "SyncAuthUserV1[profileChangedAt]" has a null value in JSON.');
+        assert(json.containsKey(r'quotaSizeInBytes'), 'Required key "SyncAuthUserV1[quotaSizeInBytes]" is missing from JSON.');
+        assert(json.containsKey(r'quotaUsageInBytes'), 'Required key "SyncAuthUserV1[quotaUsageInBytes]" is missing from JSON.');
+        assert(json[r'quotaUsageInBytes'] != null, 'Required key "SyncAuthUserV1[quotaUsageInBytes]" has a null value in JSON.');
+        assert(json.containsKey(r'storageLabel'), 'Required key "SyncAuthUserV1[storageLabel]" is missing from JSON.');
+        return true;
+      }());
 
       return SyncAuthUserV1(
         avatarColor: UserAvatarColor.fromJson(json[r'avatarColor']),

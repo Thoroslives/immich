@@ -55,9 +55,21 @@ class ServerVersionHistoryResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static ServerVersionHistoryResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "ServerVersionHistoryResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'createdAt'), 'Required key "ServerVersionHistoryResponseDto[createdAt]" is missing from JSON.');
+        assert(json[r'createdAt'] != null, 'Required key "ServerVersionHistoryResponseDto[createdAt]" has a null value in JSON.');
+        assert(json.containsKey(r'id'), 'Required key "ServerVersionHistoryResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "ServerVersionHistoryResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'version'), 'Required key "ServerVersionHistoryResponseDto[version]" is missing from JSON.');
+        assert(json[r'version'] != null, 'Required key "ServerVersionHistoryResponseDto[version]" has a null value in JSON.');
+        return true;
+      }());
 
       return ServerVersionHistoryResponseDto(
         createdAt: mapDateTime(json, r'createdAt', r'')!,

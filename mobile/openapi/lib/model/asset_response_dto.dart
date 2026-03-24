@@ -262,13 +262,13 @@ class AssetResponseDto {
     if (this.duplicateId != null) {
       json[r'duplicateId'] = this.duplicateId;
     } else {
-    //  json[r'duplicateId'] = null;
+      json[r'duplicateId'] = null;
     }
       json[r'duration'] = this.duration;
     if (this.exifInfo != null) {
       json[r'exifInfo'] = this.exifInfo;
     } else {
-    //  json[r'exifInfo'] = null;
+      json[r'exifInfo'] = null;
     }
       json[r'fileCreatedAt'] = this.fileCreatedAt.toUtc().toIso8601String();
       json[r'fileModifiedAt'] = this.fileModifiedAt.toUtc().toIso8601String();
@@ -276,7 +276,7 @@ class AssetResponseDto {
     if (this.height != null) {
       json[r'height'] = this.height;
     } else {
-    //  json[r'height'] = null;
+      json[r'height'] = null;
     }
       json[r'id'] = this.id;
       json[r'isArchived'] = this.isArchived;
@@ -287,43 +287,43 @@ class AssetResponseDto {
     if (this.libraryId != null) {
       json[r'libraryId'] = this.libraryId;
     } else {
-    //  json[r'libraryId'] = null;
+      json[r'libraryId'] = null;
     }
     if (this.livePhotoVideoId != null) {
       json[r'livePhotoVideoId'] = this.livePhotoVideoId;
     } else {
-    //  json[r'livePhotoVideoId'] = null;
+      json[r'livePhotoVideoId'] = null;
     }
       json[r'localDateTime'] = this.localDateTime.toUtc().toIso8601String();
       json[r'originalFileName'] = this.originalFileName;
     if (this.originalMimeType != null) {
       json[r'originalMimeType'] = this.originalMimeType;
     } else {
-    //  json[r'originalMimeType'] = null;
+      json[r'originalMimeType'] = null;
     }
       json[r'originalPath'] = this.originalPath;
     if (this.owner != null) {
       json[r'owner'] = this.owner;
     } else {
-    //  json[r'owner'] = null;
+      json[r'owner'] = null;
     }
       json[r'ownerId'] = this.ownerId;
       json[r'people'] = this.people;
     if (this.resized != null) {
       json[r'resized'] = this.resized;
     } else {
-    //  json[r'resized'] = null;
+      json[r'resized'] = null;
     }
     if (this.stack != null) {
       json[r'stack'] = this.stack;
     } else {
-    //  json[r'stack'] = null;
+      json[r'stack'] = null;
     }
       json[r'tags'] = this.tags;
     if (this.thumbhash != null) {
       json[r'thumbhash'] = this.thumbhash;
     } else {
-    //  json[r'thumbhash'] = null;
+      json[r'thumbhash'] = null;
     }
       json[r'type'] = this.type;
       json[r'unassignedFaces'] = this.unassignedFaces;
@@ -332,7 +332,7 @@ class AssetResponseDto {
     if (this.width != null) {
       json[r'width'] = this.width;
     } else {
-    //  json[r'width'] = null;
+      json[r'width'] = null;
     }
     return json;
   }
@@ -341,9 +341,60 @@ class AssetResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static AssetResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "AssetResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'checksum'), 'Required key "AssetResponseDto[checksum]" is missing from JSON.');
+        assert(json[r'checksum'] != null, 'Required key "AssetResponseDto[checksum]" has a null value in JSON.');
+        assert(json.containsKey(r'createdAt'), 'Required key "AssetResponseDto[createdAt]" is missing from JSON.');
+        assert(json[r'createdAt'] != null, 'Required key "AssetResponseDto[createdAt]" has a null value in JSON.');
+        assert(json.containsKey(r'deviceAssetId'), 'Required key "AssetResponseDto[deviceAssetId]" is missing from JSON.');
+        assert(json[r'deviceAssetId'] != null, 'Required key "AssetResponseDto[deviceAssetId]" has a null value in JSON.');
+        assert(json.containsKey(r'deviceId'), 'Required key "AssetResponseDto[deviceId]" is missing from JSON.');
+        assert(json[r'deviceId'] != null, 'Required key "AssetResponseDto[deviceId]" has a null value in JSON.');
+        assert(json.containsKey(r'duration'), 'Required key "AssetResponseDto[duration]" is missing from JSON.');
+        assert(json[r'duration'] != null, 'Required key "AssetResponseDto[duration]" has a null value in JSON.');
+        assert(json.containsKey(r'fileCreatedAt'), 'Required key "AssetResponseDto[fileCreatedAt]" is missing from JSON.');
+        assert(json[r'fileCreatedAt'] != null, 'Required key "AssetResponseDto[fileCreatedAt]" has a null value in JSON.');
+        assert(json.containsKey(r'fileModifiedAt'), 'Required key "AssetResponseDto[fileModifiedAt]" is missing from JSON.');
+        assert(json[r'fileModifiedAt'] != null, 'Required key "AssetResponseDto[fileModifiedAt]" has a null value in JSON.');
+        assert(json.containsKey(r'hasMetadata'), 'Required key "AssetResponseDto[hasMetadata]" is missing from JSON.');
+        assert(json[r'hasMetadata'] != null, 'Required key "AssetResponseDto[hasMetadata]" has a null value in JSON.');
+        assert(json.containsKey(r'height'), 'Required key "AssetResponseDto[height]" is missing from JSON.');
+        assert(json.containsKey(r'id'), 'Required key "AssetResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "AssetResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'isArchived'), 'Required key "AssetResponseDto[isArchived]" is missing from JSON.');
+        assert(json[r'isArchived'] != null, 'Required key "AssetResponseDto[isArchived]" has a null value in JSON.');
+        assert(json.containsKey(r'isEdited'), 'Required key "AssetResponseDto[isEdited]" is missing from JSON.');
+        assert(json[r'isEdited'] != null, 'Required key "AssetResponseDto[isEdited]" has a null value in JSON.');
+        assert(json.containsKey(r'isFavorite'), 'Required key "AssetResponseDto[isFavorite]" is missing from JSON.');
+        assert(json[r'isFavorite'] != null, 'Required key "AssetResponseDto[isFavorite]" has a null value in JSON.');
+        assert(json.containsKey(r'isOffline'), 'Required key "AssetResponseDto[isOffline]" is missing from JSON.');
+        assert(json[r'isOffline'] != null, 'Required key "AssetResponseDto[isOffline]" has a null value in JSON.');
+        assert(json.containsKey(r'isTrashed'), 'Required key "AssetResponseDto[isTrashed]" is missing from JSON.');
+        assert(json[r'isTrashed'] != null, 'Required key "AssetResponseDto[isTrashed]" has a null value in JSON.');
+        assert(json.containsKey(r'localDateTime'), 'Required key "AssetResponseDto[localDateTime]" is missing from JSON.');
+        assert(json[r'localDateTime'] != null, 'Required key "AssetResponseDto[localDateTime]" has a null value in JSON.');
+        assert(json.containsKey(r'originalFileName'), 'Required key "AssetResponseDto[originalFileName]" is missing from JSON.');
+        assert(json[r'originalFileName'] != null, 'Required key "AssetResponseDto[originalFileName]" has a null value in JSON.');
+        assert(json.containsKey(r'originalPath'), 'Required key "AssetResponseDto[originalPath]" is missing from JSON.');
+        assert(json[r'originalPath'] != null, 'Required key "AssetResponseDto[originalPath]" has a null value in JSON.');
+        assert(json.containsKey(r'ownerId'), 'Required key "AssetResponseDto[ownerId]" is missing from JSON.');
+        assert(json[r'ownerId'] != null, 'Required key "AssetResponseDto[ownerId]" has a null value in JSON.');
+        assert(json.containsKey(r'thumbhash'), 'Required key "AssetResponseDto[thumbhash]" is missing from JSON.');
+        assert(json.containsKey(r'type'), 'Required key "AssetResponseDto[type]" is missing from JSON.');
+        assert(json[r'type'] != null, 'Required key "AssetResponseDto[type]" has a null value in JSON.');
+        assert(json.containsKey(r'updatedAt'), 'Required key "AssetResponseDto[updatedAt]" is missing from JSON.');
+        assert(json[r'updatedAt'] != null, 'Required key "AssetResponseDto[updatedAt]" has a null value in JSON.');
+        assert(json.containsKey(r'visibility'), 'Required key "AssetResponseDto[visibility]" is missing from JSON.');
+        assert(json[r'visibility'] != null, 'Required key "AssetResponseDto[visibility]" has a null value in JSON.');
+        assert(json.containsKey(r'width'), 'Required key "AssetResponseDto[width]" is missing from JSON.');
+        return true;
+      }());
 
       return AssetResponseDto(
         checksum: mapValueOfType<String>(json, r'checksum')!,

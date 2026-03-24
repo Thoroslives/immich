@@ -72,22 +72,22 @@ class UserUpdateMeDto {
     if (this.avatarColor != null) {
       json[r'avatarColor'] = this.avatarColor;
     } else {
-    //  json[r'avatarColor'] = null;
+      json[r'avatarColor'] = null;
     }
     if (this.email != null) {
       json[r'email'] = this.email;
     } else {
-    //  json[r'email'] = null;
+      json[r'email'] = null;
     }
     if (this.name != null) {
       json[r'name'] = this.name;
     } else {
-    //  json[r'name'] = null;
+      json[r'name'] = null;
     }
     if (this.password != null) {
       json[r'password'] = this.password;
     } else {
-    //  json[r'password'] = null;
+      json[r'password'] = null;
     }
     return json;
   }
@@ -96,9 +96,15 @@ class UserUpdateMeDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static UserUpdateMeDto? fromJson(dynamic value) {
-    upgradeDto(value, "UserUpdateMeDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return UserUpdateMeDto(
         avatarColor: UserAvatarColor.fromJson(json[r'avatarColor']),

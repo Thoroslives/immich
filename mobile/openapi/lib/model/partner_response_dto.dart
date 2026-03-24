@@ -81,7 +81,7 @@ class PartnerResponseDto {
     if (this.inTimeline != null) {
       json[r'inTimeline'] = this.inTimeline;
     } else {
-    //  json[r'inTimeline'] = null;
+      json[r'inTimeline'] = null;
     }
       json[r'name'] = this.name;
       json[r'profileChangedAt'] = this.profileChangedAt.toUtc().toIso8601String();
@@ -93,9 +93,27 @@ class PartnerResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static PartnerResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "PartnerResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'avatarColor'), 'Required key "PartnerResponseDto[avatarColor]" is missing from JSON.');
+        assert(json[r'avatarColor'] != null, 'Required key "PartnerResponseDto[avatarColor]" has a null value in JSON.');
+        assert(json.containsKey(r'email'), 'Required key "PartnerResponseDto[email]" is missing from JSON.');
+        assert(json[r'email'] != null, 'Required key "PartnerResponseDto[email]" has a null value in JSON.');
+        assert(json.containsKey(r'id'), 'Required key "PartnerResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "PartnerResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'name'), 'Required key "PartnerResponseDto[name]" is missing from JSON.');
+        assert(json[r'name'] != null, 'Required key "PartnerResponseDto[name]" has a null value in JSON.');
+        assert(json.containsKey(r'profileChangedAt'), 'Required key "PartnerResponseDto[profileChangedAt]" is missing from JSON.');
+        assert(json[r'profileChangedAt'] != null, 'Required key "PartnerResponseDto[profileChangedAt]" has a null value in JSON.');
+        assert(json.containsKey(r'profileImagePath'), 'Required key "PartnerResponseDto[profileImagePath]" is missing from JSON.');
+        assert(json[r'profileImagePath'] != null, 'Required key "PartnerResponseDto[profileImagePath]" has a null value in JSON.');
+        return true;
+      }());
 
       return PartnerResponseDto(
         avatarColor: UserAvatarColor.fromJson(json[r'avatarColor'])!,

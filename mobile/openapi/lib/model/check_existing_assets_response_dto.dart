@@ -41,9 +41,17 @@ class CheckExistingAssetsResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static CheckExistingAssetsResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "CheckExistingAssetsResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'existingIds'), 'Required key "CheckExistingAssetsResponseDto[existingIds]" is missing from JSON.');
+        assert(json[r'existingIds'] != null, 'Required key "CheckExistingAssetsResponseDto[existingIds]" has a null value in JSON.');
+        return true;
+      }());
 
       return CheckExistingAssetsResponseDto(
         existingIds: json[r'existingIds'] is Iterable

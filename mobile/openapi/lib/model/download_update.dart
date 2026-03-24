@@ -56,12 +56,12 @@ class DownloadUpdate {
     if (this.archiveSize != null) {
       json[r'archiveSize'] = this.archiveSize;
     } else {
-    //  json[r'archiveSize'] = null;
+      json[r'archiveSize'] = null;
     }
     if (this.includeEmbeddedVideos != null) {
       json[r'includeEmbeddedVideos'] = this.includeEmbeddedVideos;
     } else {
-    //  json[r'includeEmbeddedVideos'] = null;
+      json[r'includeEmbeddedVideos'] = null;
     }
     return json;
   }
@@ -70,9 +70,15 @@ class DownloadUpdate {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static DownloadUpdate? fromJson(dynamic value) {
-    upgradeDto(value, "DownloadUpdate");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return DownloadUpdate(
         archiveSize: mapValueOfType<int>(json, r'archiveSize'),

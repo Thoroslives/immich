@@ -72,12 +72,12 @@ class PlacesResponseDto {
     if (this.admin1name != null) {
       json[r'admin1name'] = this.admin1name;
     } else {
-    //  json[r'admin1name'] = null;
+      json[r'admin1name'] = null;
     }
     if (this.admin2name != null) {
       json[r'admin2name'] = this.admin2name;
     } else {
-    //  json[r'admin2name'] = null;
+      json[r'admin2name'] = null;
     }
       json[r'latitude'] = this.latitude;
       json[r'longitude'] = this.longitude;
@@ -89,9 +89,21 @@ class PlacesResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static PlacesResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "PlacesResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'latitude'), 'Required key "PlacesResponseDto[latitude]" is missing from JSON.');
+        assert(json[r'latitude'] != null, 'Required key "PlacesResponseDto[latitude]" has a null value in JSON.');
+        assert(json.containsKey(r'longitude'), 'Required key "PlacesResponseDto[longitude]" is missing from JSON.');
+        assert(json[r'longitude'] != null, 'Required key "PlacesResponseDto[longitude]" has a null value in JSON.');
+        assert(json.containsKey(r'name'), 'Required key "PlacesResponseDto[name]" is missing from JSON.');
+        assert(json[r'name'] != null, 'Required key "PlacesResponseDto[name]" has a null value in JSON.');
+        return true;
+      }());
 
       return PlacesResponseDto(
         admin1name: mapValueOfType<String>(json, r'admin1name'),

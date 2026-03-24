@@ -90,28 +90,28 @@ class NotificationCreateDto {
     if (this.data != null) {
       json[r'data'] = this.data;
     } else {
-    //  json[r'data'] = null;
+      json[r'data'] = null;
     }
     if (this.description != null) {
       json[r'description'] = this.description;
     } else {
-    //  json[r'description'] = null;
+      json[r'description'] = null;
     }
     if (this.level != null) {
       json[r'level'] = this.level;
     } else {
-    //  json[r'level'] = null;
+      json[r'level'] = null;
     }
     if (this.readAt != null) {
       json[r'readAt'] = this.readAt!.toUtc().toIso8601String();
     } else {
-    //  json[r'readAt'] = null;
+      json[r'readAt'] = null;
     }
       json[r'title'] = this.title;
     if (this.type != null) {
       json[r'type'] = this.type;
     } else {
-    //  json[r'type'] = null;
+      json[r'type'] = null;
     }
       json[r'userId'] = this.userId;
     return json;
@@ -121,9 +121,19 @@ class NotificationCreateDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static NotificationCreateDto? fromJson(dynamic value) {
-    upgradeDto(value, "NotificationCreateDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'title'), 'Required key "NotificationCreateDto[title]" is missing from JSON.');
+        assert(json[r'title'] != null, 'Required key "NotificationCreateDto[title]" has a null value in JSON.');
+        assert(json.containsKey(r'userId'), 'Required key "NotificationCreateDto[userId]" is missing from JSON.');
+        assert(json[r'userId'] != null, 'Required key "NotificationCreateDto[userId]" has a null value in JSON.');
+        return true;
+      }());
 
       return NotificationCreateDto(
         data: mapValueOfType<Object>(json, r'data'),

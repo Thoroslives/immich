@@ -65,12 +65,12 @@ class ActivityResponseDto {
     if (this.assetId != null) {
       json[r'assetId'] = this.assetId;
     } else {
-    //  json[r'assetId'] = null;
+      json[r'assetId'] = null;
     }
     if (this.comment != null) {
       json[r'comment'] = this.comment;
     } else {
-    //  json[r'comment'] = null;
+      json[r'comment'] = null;
     }
       json[r'createdAt'] = this.createdAt.toUtc().toIso8601String();
       json[r'id'] = this.id;
@@ -83,9 +83,24 @@ class ActivityResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static ActivityResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "ActivityResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'assetId'), 'Required key "ActivityResponseDto[assetId]" is missing from JSON.');
+        assert(json.containsKey(r'createdAt'), 'Required key "ActivityResponseDto[createdAt]" is missing from JSON.');
+        assert(json[r'createdAt'] != null, 'Required key "ActivityResponseDto[createdAt]" has a null value in JSON.');
+        assert(json.containsKey(r'id'), 'Required key "ActivityResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "ActivityResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'type'), 'Required key "ActivityResponseDto[type]" is missing from JSON.');
+        assert(json[r'type'] != null, 'Required key "ActivityResponseDto[type]" has a null value in JSON.');
+        assert(json.containsKey(r'user'), 'Required key "ActivityResponseDto[user]" is missing from JSON.');
+        assert(json[r'user'] != null, 'Required key "ActivityResponseDto[user]" has a null value in JSON.');
+        return true;
+      }());
 
       return ActivityResponseDto(
         assetId: mapValueOfType<String>(json, r'assetId'),

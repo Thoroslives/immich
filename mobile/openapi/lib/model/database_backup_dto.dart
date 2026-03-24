@@ -46,9 +46,19 @@ class DatabaseBackupDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static DatabaseBackupDto? fromJson(dynamic value) {
-    upgradeDto(value, "DatabaseBackupDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'filename'), 'Required key "DatabaseBackupDto[filename]" is missing from JSON.');
+        assert(json[r'filename'] != null, 'Required key "DatabaseBackupDto[filename]" has a null value in JSON.');
+        assert(json.containsKey(r'filesize'), 'Required key "DatabaseBackupDto[filesize]" is missing from JSON.');
+        assert(json[r'filesize'] != null, 'Required key "DatabaseBackupDto[filesize]" has a null value in JSON.');
+        return true;
+      }());
 
       return DatabaseBackupDto(
         filename: mapValueOfType<String>(json, r'filename')!,

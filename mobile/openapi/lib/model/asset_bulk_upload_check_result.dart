@@ -73,18 +73,18 @@ class AssetBulkUploadCheckResult {
     if (this.assetId != null) {
       json[r'assetId'] = this.assetId;
     } else {
-    //  json[r'assetId'] = null;
+      json[r'assetId'] = null;
     }
       json[r'id'] = this.id;
     if (this.isTrashed != null) {
       json[r'isTrashed'] = this.isTrashed;
     } else {
-    //  json[r'isTrashed'] = null;
+      json[r'isTrashed'] = null;
     }
     if (this.reason != null) {
       json[r'reason'] = this.reason;
     } else {
-    //  json[r'reason'] = null;
+      json[r'reason'] = null;
     }
     return json;
   }
@@ -93,9 +93,19 @@ class AssetBulkUploadCheckResult {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static AssetBulkUploadCheckResult? fromJson(dynamic value) {
-    upgradeDto(value, "AssetBulkUploadCheckResult");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'action'), 'Required key "AssetBulkUploadCheckResult[action]" is missing from JSON.');
+        assert(json[r'action'] != null, 'Required key "AssetBulkUploadCheckResult[action]" has a null value in JSON.');
+        assert(json.containsKey(r'id'), 'Required key "AssetBulkUploadCheckResult[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "AssetBulkUploadCheckResult[id]" has a null value in JSON.');
+        return true;
+      }());
 
       return AssetBulkUploadCheckResult(
         action: AssetBulkUploadCheckResultActionEnum.fromJson(json[r'action'])!,

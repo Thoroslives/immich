@@ -65,9 +65,21 @@ class SystemConfigGeneratedFullsizeImageDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static SystemConfigGeneratedFullsizeImageDto? fromJson(dynamic value) {
-    upgradeDto(value, "SystemConfigGeneratedFullsizeImageDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'enabled'), 'Required key "SystemConfigGeneratedFullsizeImageDto[enabled]" is missing from JSON.');
+        assert(json[r'enabled'] != null, 'Required key "SystemConfigGeneratedFullsizeImageDto[enabled]" has a null value in JSON.');
+        assert(json.containsKey(r'format'), 'Required key "SystemConfigGeneratedFullsizeImageDto[format]" is missing from JSON.');
+        assert(json[r'format'] != null, 'Required key "SystemConfigGeneratedFullsizeImageDto[format]" has a null value in JSON.');
+        assert(json.containsKey(r'quality'), 'Required key "SystemConfigGeneratedFullsizeImageDto[quality]" is missing from JSON.');
+        assert(json[r'quality'] != null, 'Required key "SystemConfigGeneratedFullsizeImageDto[quality]" has a null value in JSON.');
+        return true;
+      }());
 
       return SystemConfigGeneratedFullsizeImageDto(
         enabled: mapValueOfType<bool>(json, r'enabled')!,

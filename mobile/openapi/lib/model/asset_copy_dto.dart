@@ -83,9 +83,19 @@ class AssetCopyDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static AssetCopyDto? fromJson(dynamic value) {
-    upgradeDto(value, "AssetCopyDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'sourceId'), 'Required key "AssetCopyDto[sourceId]" is missing from JSON.');
+        assert(json[r'sourceId'] != null, 'Required key "AssetCopyDto[sourceId]" has a null value in JSON.');
+        assert(json.containsKey(r'targetId'), 'Required key "AssetCopyDto[targetId]" is missing from JSON.');
+        assert(json[r'targetId'] != null, 'Required key "AssetCopyDto[targetId]" has a null value in JSON.');
+        return true;
+      }());
 
       return AssetCopyDto(
         albums: mapValueOfType<bool>(json, r'albums') ?? true,

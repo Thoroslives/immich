@@ -54,12 +54,12 @@ class SessionUnlockDto {
     if (this.password != null) {
       json[r'password'] = this.password;
     } else {
-    //  json[r'password'] = null;
+      json[r'password'] = null;
     }
     if (this.pinCode != null) {
       json[r'pinCode'] = this.pinCode;
     } else {
-    //  json[r'pinCode'] = null;
+      json[r'pinCode'] = null;
     }
     return json;
   }
@@ -68,9 +68,15 @@ class SessionUnlockDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static SessionUnlockDto? fromJson(dynamic value) {
-    upgradeDto(value, "SessionUnlockDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return SessionUnlockDto(
         password: mapValueOfType<String>(json, r'password'),

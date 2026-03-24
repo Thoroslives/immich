@@ -42,12 +42,12 @@ class VersionCheckStateResponseDto {
     if (this.checkedAt != null) {
       json[r'checkedAt'] = this.checkedAt;
     } else {
-    //  json[r'checkedAt'] = null;
+      json[r'checkedAt'] = null;
     }
     if (this.releaseVersion != null) {
       json[r'releaseVersion'] = this.releaseVersion;
     } else {
-    //  json[r'releaseVersion'] = null;
+      json[r'releaseVersion'] = null;
     }
     return json;
   }
@@ -56,9 +56,17 @@ class VersionCheckStateResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static VersionCheckStateResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "VersionCheckStateResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'checkedAt'), 'Required key "VersionCheckStateResponseDto[checkedAt]" is missing from JSON.');
+        assert(json.containsKey(r'releaseVersion'), 'Required key "VersionCheckStateResponseDto[releaseVersion]" is missing from JSON.');
+        return true;
+      }());
 
       return VersionCheckStateResponseDto(
         checkedAt: mapValueOfType<String>(json, r'checkedAt'),

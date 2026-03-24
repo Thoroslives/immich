@@ -13,14 +13,14 @@ part of openapi.api;
 class SharedLinkEditDto {
   /// Returns a new [SharedLinkEditDto] instance.
   SharedLinkEditDto({
-    this.allowDownload,
-    this.allowUpload,
-    this.changeExpiryTime,
-    this.description,
-    this.expiresAt,
-    this.password,
-    this.showMetadata,
-    this.slug,
+    this.allowDownload = const Optional.absent(),
+    this.allowUpload = const Optional.absent(),
+    this.changeExpiryTime = const Optional.absent(),
+    this.description = const Optional.absent(),
+    this.expiresAt = const Optional.absent(),
+    this.password = const Optional.absent(),
+    this.showMetadata = const Optional.absent(),
+    this.slug = const Optional.absent(),
   });
 
   /// Allow downloads
@@ -30,7 +30,7 @@ class SharedLinkEditDto {
   /// source code must fall back to having a nullable type.
   /// Consider adding a "default:" property in the specification file to hide this note.
   ///
-  bool? allowDownload;
+  Optional<bool?> allowDownload;
 
   /// Allow uploads
   ///
@@ -39,7 +39,7 @@ class SharedLinkEditDto {
   /// source code must fall back to having a nullable type.
   /// Consider adding a "default:" property in the specification file to hide this note.
   ///
-  bool? allowUpload;
+  Optional<bool?> allowUpload;
 
   /// Whether to change the expiry time. Few clients cannot send null to set the expiryTime to never. Setting this flag and not sending expiryAt is considered as null instead. Clients that can send null values can ignore this.
   ///
@@ -48,16 +48,16 @@ class SharedLinkEditDto {
   /// source code must fall back to having a nullable type.
   /// Consider adding a "default:" property in the specification file to hide this note.
   ///
-  bool? changeExpiryTime;
+  Optional<bool?> changeExpiryTime;
 
   /// Link description
-  String? description;
+  Optional<String?> description;
 
   /// Expiration date
-  DateTime? expiresAt;
+  Optional<DateTime?> expiresAt;
 
   /// Link password
-  String? password;
+  Optional<String?> password;
 
   /// Show metadata
   ///
@@ -66,10 +66,10 @@ class SharedLinkEditDto {
   /// source code must fall back to having a nullable type.
   /// Consider adding a "default:" property in the specification file to hide this note.
   ///
-  bool? showMetadata;
+  Optional<bool?> showMetadata;
 
   /// Custom URL slug
-  String? slug;
+  Optional<String?> slug;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is SharedLinkEditDto &&
@@ -99,45 +99,37 @@ class SharedLinkEditDto {
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-    if (this.allowDownload != null) {
-      json[r'allowDownload'] = this.allowDownload;
-    } else {
-    //  json[r'allowDownload'] = null;
+    if (this.allowDownload.isPresent) {
+      final value = this.allowDownload.value;
+      json[r'allowDownload'] = value;
     }
-    if (this.allowUpload != null) {
-      json[r'allowUpload'] = this.allowUpload;
-    } else {
-    //  json[r'allowUpload'] = null;
+    if (this.allowUpload.isPresent) {
+      final value = this.allowUpload.value;
+      json[r'allowUpload'] = value;
     }
-    if (this.changeExpiryTime != null) {
-      json[r'changeExpiryTime'] = this.changeExpiryTime;
-    } else {
-    //  json[r'changeExpiryTime'] = null;
+    if (this.changeExpiryTime.isPresent) {
+      final value = this.changeExpiryTime.value;
+      json[r'changeExpiryTime'] = value;
     }
-    if (this.description != null) {
-      json[r'description'] = this.description;
-    } else {
-    //  json[r'description'] = null;
+    if (this.description.isPresent) {
+      final value = this.description.value;
+      json[r'description'] = value;
     }
-    if (this.expiresAt != null) {
-      json[r'expiresAt'] = this.expiresAt!.toUtc().toIso8601String();
-    } else {
-    //  json[r'expiresAt'] = null;
+    if (this.expiresAt.isPresent) {
+      final value = this.expiresAt.value;
+      json[r'expiresAt'] = value == null ? null : value.toUtc().toIso8601String();
     }
-    if (this.password != null) {
-      json[r'password'] = this.password;
-    } else {
-    //  json[r'password'] = null;
+    if (this.password.isPresent) {
+      final value = this.password.value;
+      json[r'password'] = value;
     }
-    if (this.showMetadata != null) {
-      json[r'showMetadata'] = this.showMetadata;
-    } else {
-    //  json[r'showMetadata'] = null;
+    if (this.showMetadata.isPresent) {
+      final value = this.showMetadata.value;
+      json[r'showMetadata'] = value;
     }
-    if (this.slug != null) {
-      json[r'slug'] = this.slug;
-    } else {
-    //  json[r'slug'] = null;
+    if (this.slug.isPresent) {
+      final value = this.slug.value;
+      json[r'slug'] = value;
     }
     return json;
   }
@@ -146,19 +138,25 @@ class SharedLinkEditDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static SharedLinkEditDto? fromJson(dynamic value) {
-    upgradeDto(value, "SharedLinkEditDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
 
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
+
       return SharedLinkEditDto(
-        allowDownload: mapValueOfType<bool>(json, r'allowDownload'),
-        allowUpload: mapValueOfType<bool>(json, r'allowUpload'),
-        changeExpiryTime: mapValueOfType<bool>(json, r'changeExpiryTime'),
-        description: mapValueOfType<String>(json, r'description'),
-        expiresAt: mapDateTime(json, r'expiresAt', r''),
-        password: mapValueOfType<String>(json, r'password'),
-        showMetadata: mapValueOfType<bool>(json, r'showMetadata'),
-        slug: mapValueOfType<String>(json, r'slug'),
+        allowDownload: json.containsKey(r'allowDownload') ? Optional.present(mapValueOfType<bool>(json, r'allowDownload')) : const Optional.absent(),
+        allowUpload: json.containsKey(r'allowUpload') ? Optional.present(mapValueOfType<bool>(json, r'allowUpload')) : const Optional.absent(),
+        changeExpiryTime: json.containsKey(r'changeExpiryTime') ? Optional.present(mapValueOfType<bool>(json, r'changeExpiryTime')) : const Optional.absent(),
+        description: json.containsKey(r'description') ? Optional.present(mapValueOfType<String>(json, r'description')) : const Optional.absent(),
+        expiresAt: json.containsKey(r'expiresAt') ? Optional.present(mapDateTime(json, r'expiresAt', r'')) : const Optional.absent(),
+        password: json.containsKey(r'password') ? Optional.present(mapValueOfType<String>(json, r'password')) : const Optional.absent(),
+        showMetadata: json.containsKey(r'showMetadata') ? Optional.present(mapValueOfType<bool>(json, r'showMetadata')) : const Optional.absent(),
+        slug: json.containsKey(r'slug') ? Optional.present(mapValueOfType<String>(json, r'slug')) : const Optional.absent(),
       );
     }
     return null;

@@ -97,19 +97,19 @@ class NotificationDto {
     if (this.data != null) {
       json[r'data'] = this.data;
     } else {
-    //  json[r'data'] = null;
+      json[r'data'] = null;
     }
     if (this.description != null) {
       json[r'description'] = this.description;
     } else {
-    //  json[r'description'] = null;
+      json[r'description'] = null;
     }
       json[r'id'] = this.id;
       json[r'level'] = this.level;
     if (this.readAt != null) {
       json[r'readAt'] = this.readAt!.toUtc().toIso8601String();
     } else {
-    //  json[r'readAt'] = null;
+      json[r'readAt'] = null;
     }
       json[r'title'] = this.title;
       json[r'type'] = this.type;
@@ -120,9 +120,25 @@ class NotificationDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static NotificationDto? fromJson(dynamic value) {
-    upgradeDto(value, "NotificationDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'createdAt'), 'Required key "NotificationDto[createdAt]" is missing from JSON.');
+        assert(json[r'createdAt'] != null, 'Required key "NotificationDto[createdAt]" has a null value in JSON.');
+        assert(json.containsKey(r'id'), 'Required key "NotificationDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "NotificationDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'level'), 'Required key "NotificationDto[level]" is missing from JSON.');
+        assert(json[r'level'] != null, 'Required key "NotificationDto[level]" has a null value in JSON.');
+        assert(json.containsKey(r'title'), 'Required key "NotificationDto[title]" is missing from JSON.');
+        assert(json[r'title'] != null, 'Required key "NotificationDto[title]" has a null value in JSON.');
+        assert(json.containsKey(r'type'), 'Required key "NotificationDto[type]" is missing from JSON.');
+        assert(json[r'type'] != null, 'Required key "NotificationDto[type]" has a null value in JSON.');
+        return true;
+      }());
 
       return NotificationDto(
         createdAt: mapDateTime(json, r'createdAt', r'')!,

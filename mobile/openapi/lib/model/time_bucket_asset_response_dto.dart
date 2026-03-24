@@ -34,13 +34,13 @@ class TimeBucketAssetResponseDto {
   });
 
   /// Array of city names extracted from EXIF GPS data
-  List<String?> city;
+  List<String> city;
 
   /// Array of country names extracted from EXIF GPS data
-  List<String?> country;
+  List<String> country;
 
   /// Array of video durations in HH:MM:SS format (null for images)
-  List<String?> duration;
+  List<String> duration;
 
   /// Array of file creation timestamps in UTC
   List<String> fileCreatedAt;
@@ -58,31 +58,31 @@ class TimeBucketAssetResponseDto {
   List<bool> isTrashed;
 
   /// Array of latitude coordinates extracted from EXIF GPS data
-  List<num?> latitude;
+  List<num> latitude;
 
   /// Array of live photo video asset IDs (null for non-live photos)
-  List<String?> livePhotoVideoId;
+  List<String> livePhotoVideoId;
 
   /// Array of UTC offset hours at the time each photo was taken. Positive values are east of UTC, negative values are west of UTC. Values may be fractional (e.g., 5.5 for +05:30, -9.75 for -09:45). Applying this offset to 'fileCreatedAt' will give you the time the photo was taken from the photographer's perspective.
   List<num> localOffsetHours;
 
   /// Array of longitude coordinates extracted from EXIF GPS data
-  List<num?> longitude;
+  List<num> longitude;
 
   /// Array of owner IDs for each asset
   List<String> ownerId;
 
   /// Array of projection types for 360° content (e.g., \"EQUIRECTANGULAR\", \"CUBEFACE\", \"CYLINDRICAL\")
-  List<String?> projectionType;
+  List<String> projectionType;
 
   /// Array of aspect ratios (width/height) for each asset
   List<num> ratio;
 
   /// Array of stack information as [stackId, assetCount] tuples (null for non-stacked assets)
-  List<List<String>?> stack;
+  List<List<String>> stack;
 
   /// Array of BlurHash strings for generating asset previews (base64 encoded)
-  List<String?> thumbhash;
+  List<String> thumbhash;
 
   /// Array of visibility statuses for each asset (e.g., ARCHIVE, TIMELINE, HIDDEN, LOCKED)
   List<AssetVisibility> visibility;
@@ -160,9 +160,45 @@ class TimeBucketAssetResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static TimeBucketAssetResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "TimeBucketAssetResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'city'), 'Required key "TimeBucketAssetResponseDto[city]" is missing from JSON.');
+        assert(json[r'city'] != null, 'Required key "TimeBucketAssetResponseDto[city]" has a null value in JSON.');
+        assert(json.containsKey(r'country'), 'Required key "TimeBucketAssetResponseDto[country]" is missing from JSON.');
+        assert(json[r'country'] != null, 'Required key "TimeBucketAssetResponseDto[country]" has a null value in JSON.');
+        assert(json.containsKey(r'duration'), 'Required key "TimeBucketAssetResponseDto[duration]" is missing from JSON.');
+        assert(json[r'duration'] != null, 'Required key "TimeBucketAssetResponseDto[duration]" has a null value in JSON.');
+        assert(json.containsKey(r'fileCreatedAt'), 'Required key "TimeBucketAssetResponseDto[fileCreatedAt]" is missing from JSON.');
+        assert(json[r'fileCreatedAt'] != null, 'Required key "TimeBucketAssetResponseDto[fileCreatedAt]" has a null value in JSON.');
+        assert(json.containsKey(r'id'), 'Required key "TimeBucketAssetResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "TimeBucketAssetResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'isFavorite'), 'Required key "TimeBucketAssetResponseDto[isFavorite]" is missing from JSON.');
+        assert(json[r'isFavorite'] != null, 'Required key "TimeBucketAssetResponseDto[isFavorite]" has a null value in JSON.');
+        assert(json.containsKey(r'isImage'), 'Required key "TimeBucketAssetResponseDto[isImage]" is missing from JSON.');
+        assert(json[r'isImage'] != null, 'Required key "TimeBucketAssetResponseDto[isImage]" has a null value in JSON.');
+        assert(json.containsKey(r'isTrashed'), 'Required key "TimeBucketAssetResponseDto[isTrashed]" is missing from JSON.');
+        assert(json[r'isTrashed'] != null, 'Required key "TimeBucketAssetResponseDto[isTrashed]" has a null value in JSON.');
+        assert(json.containsKey(r'livePhotoVideoId'), 'Required key "TimeBucketAssetResponseDto[livePhotoVideoId]" is missing from JSON.');
+        assert(json[r'livePhotoVideoId'] != null, 'Required key "TimeBucketAssetResponseDto[livePhotoVideoId]" has a null value in JSON.');
+        assert(json.containsKey(r'localOffsetHours'), 'Required key "TimeBucketAssetResponseDto[localOffsetHours]" is missing from JSON.');
+        assert(json[r'localOffsetHours'] != null, 'Required key "TimeBucketAssetResponseDto[localOffsetHours]" has a null value in JSON.');
+        assert(json.containsKey(r'ownerId'), 'Required key "TimeBucketAssetResponseDto[ownerId]" is missing from JSON.');
+        assert(json[r'ownerId'] != null, 'Required key "TimeBucketAssetResponseDto[ownerId]" has a null value in JSON.');
+        assert(json.containsKey(r'projectionType'), 'Required key "TimeBucketAssetResponseDto[projectionType]" is missing from JSON.');
+        assert(json[r'projectionType'] != null, 'Required key "TimeBucketAssetResponseDto[projectionType]" has a null value in JSON.');
+        assert(json.containsKey(r'ratio'), 'Required key "TimeBucketAssetResponseDto[ratio]" is missing from JSON.');
+        assert(json[r'ratio'] != null, 'Required key "TimeBucketAssetResponseDto[ratio]" has a null value in JSON.');
+        assert(json.containsKey(r'thumbhash'), 'Required key "TimeBucketAssetResponseDto[thumbhash]" is missing from JSON.');
+        assert(json[r'thumbhash'] != null, 'Required key "TimeBucketAssetResponseDto[thumbhash]" has a null value in JSON.');
+        assert(json.containsKey(r'visibility'), 'Required key "TimeBucketAssetResponseDto[visibility]" is missing from JSON.');
+        assert(json[r'visibility'] != null, 'Required key "TimeBucketAssetResponseDto[visibility]" has a null value in JSON.');
+        return true;
+      }());
 
       return TimeBucketAssetResponseDto(
         city: json[r'city'] is Iterable
@@ -212,7 +248,7 @@ class TimeBucketAssetResponseDto {
             : const [],
         stack: json[r'stack'] is List
           ? (json[r'stack'] as List).map((e) =>
-              e == null ? null : (e as List).cast<String>()
+              e == null ? const <String>[] : (e as List).cast<String>()
             ).toList()
           :  const [],
         thumbhash: json[r'thumbhash'] is Iterable

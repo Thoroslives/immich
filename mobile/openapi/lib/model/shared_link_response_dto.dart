@@ -124,7 +124,7 @@ class SharedLinkResponseDto {
     if (this.album != null) {
       json[r'album'] = this.album;
     } else {
-    //  json[r'album'] = null;
+      json[r'album'] = null;
     }
       json[r'allowDownload'] = this.allowDownload;
       json[r'allowUpload'] = this.allowUpload;
@@ -133,30 +133,30 @@ class SharedLinkResponseDto {
     if (this.description != null) {
       json[r'description'] = this.description;
     } else {
-    //  json[r'description'] = null;
+      json[r'description'] = null;
     }
     if (this.expiresAt != null) {
       json[r'expiresAt'] = this.expiresAt!.toUtc().toIso8601String();
     } else {
-    //  json[r'expiresAt'] = null;
+      json[r'expiresAt'] = null;
     }
       json[r'id'] = this.id;
       json[r'key'] = this.key;
     if (this.password != null) {
       json[r'password'] = this.password;
     } else {
-    //  json[r'password'] = null;
+      json[r'password'] = null;
     }
       json[r'showMetadata'] = this.showMetadata;
     if (this.slug != null) {
       json[r'slug'] = this.slug;
     } else {
-    //  json[r'slug'] = null;
+      json[r'slug'] = null;
     }
     if (this.token != null) {
       json[r'token'] = this.token;
     } else {
-    //  json[r'token'] = null;
+      json[r'token'] = null;
     }
       json[r'type'] = this.type;
       json[r'userId'] = this.userId;
@@ -167,9 +167,37 @@ class SharedLinkResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static SharedLinkResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "SharedLinkResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'allowDownload'), 'Required key "SharedLinkResponseDto[allowDownload]" is missing from JSON.');
+        assert(json[r'allowDownload'] != null, 'Required key "SharedLinkResponseDto[allowDownload]" has a null value in JSON.');
+        assert(json.containsKey(r'allowUpload'), 'Required key "SharedLinkResponseDto[allowUpload]" is missing from JSON.');
+        assert(json[r'allowUpload'] != null, 'Required key "SharedLinkResponseDto[allowUpload]" has a null value in JSON.');
+        assert(json.containsKey(r'assets'), 'Required key "SharedLinkResponseDto[assets]" is missing from JSON.');
+        assert(json[r'assets'] != null, 'Required key "SharedLinkResponseDto[assets]" has a null value in JSON.');
+        assert(json.containsKey(r'createdAt'), 'Required key "SharedLinkResponseDto[createdAt]" is missing from JSON.');
+        assert(json[r'createdAt'] != null, 'Required key "SharedLinkResponseDto[createdAt]" has a null value in JSON.');
+        assert(json.containsKey(r'description'), 'Required key "SharedLinkResponseDto[description]" is missing from JSON.');
+        assert(json.containsKey(r'expiresAt'), 'Required key "SharedLinkResponseDto[expiresAt]" is missing from JSON.');
+        assert(json.containsKey(r'id'), 'Required key "SharedLinkResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "SharedLinkResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'key'), 'Required key "SharedLinkResponseDto[key]" is missing from JSON.');
+        assert(json[r'key'] != null, 'Required key "SharedLinkResponseDto[key]" has a null value in JSON.');
+        assert(json.containsKey(r'password'), 'Required key "SharedLinkResponseDto[password]" is missing from JSON.');
+        assert(json.containsKey(r'showMetadata'), 'Required key "SharedLinkResponseDto[showMetadata]" is missing from JSON.');
+        assert(json[r'showMetadata'] != null, 'Required key "SharedLinkResponseDto[showMetadata]" has a null value in JSON.');
+        assert(json.containsKey(r'slug'), 'Required key "SharedLinkResponseDto[slug]" is missing from JSON.');
+        assert(json.containsKey(r'type'), 'Required key "SharedLinkResponseDto[type]" is missing from JSON.');
+        assert(json[r'type'] != null, 'Required key "SharedLinkResponseDto[type]" has a null value in JSON.');
+        assert(json.containsKey(r'userId'), 'Required key "SharedLinkResponseDto[userId]" is missing from JSON.');
+        assert(json[r'userId'] != null, 'Required key "SharedLinkResponseDto[userId]" has a null value in JSON.');
+        return true;
+      }());
 
       return SharedLinkResponseDto(
         album: AlbumResponseDto.fromJson(json[r'album']),

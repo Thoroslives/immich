@@ -55,9 +55,21 @@ class AssetDeltaSyncResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static AssetDeltaSyncResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "AssetDeltaSyncResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'deleted'), 'Required key "AssetDeltaSyncResponseDto[deleted]" is missing from JSON.');
+        assert(json[r'deleted'] != null, 'Required key "AssetDeltaSyncResponseDto[deleted]" has a null value in JSON.');
+        assert(json.containsKey(r'needsFullSync'), 'Required key "AssetDeltaSyncResponseDto[needsFullSync]" is missing from JSON.');
+        assert(json[r'needsFullSync'] != null, 'Required key "AssetDeltaSyncResponseDto[needsFullSync]" has a null value in JSON.');
+        assert(json.containsKey(r'upserted'), 'Required key "AssetDeltaSyncResponseDto[upserted]" is missing from JSON.');
+        assert(json[r'upserted'] != null, 'Required key "AssetDeltaSyncResponseDto[upserted]" has a null value in JSON.');
+        return true;
+      }());
 
       return AssetDeltaSyncResponseDto(
         deleted: json[r'deleted'] is Iterable

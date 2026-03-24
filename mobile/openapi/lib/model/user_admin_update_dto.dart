@@ -116,47 +116,47 @@ class UserAdminUpdateDto {
     if (this.avatarColor != null) {
       json[r'avatarColor'] = this.avatarColor;
     } else {
-    //  json[r'avatarColor'] = null;
+      json[r'avatarColor'] = null;
     }
     if (this.email != null) {
       json[r'email'] = this.email;
     } else {
-    //  json[r'email'] = null;
+      json[r'email'] = null;
     }
     if (this.isAdmin != null) {
       json[r'isAdmin'] = this.isAdmin;
     } else {
-    //  json[r'isAdmin'] = null;
+      json[r'isAdmin'] = null;
     }
     if (this.name != null) {
       json[r'name'] = this.name;
     } else {
-    //  json[r'name'] = null;
+      json[r'name'] = null;
     }
     if (this.password != null) {
       json[r'password'] = this.password;
     } else {
-    //  json[r'password'] = null;
+      json[r'password'] = null;
     }
     if (this.pinCode != null) {
       json[r'pinCode'] = this.pinCode;
     } else {
-    //  json[r'pinCode'] = null;
+      json[r'pinCode'] = null;
     }
     if (this.quotaSizeInBytes != null) {
       json[r'quotaSizeInBytes'] = this.quotaSizeInBytes;
     } else {
-    //  json[r'quotaSizeInBytes'] = null;
+      json[r'quotaSizeInBytes'] = null;
     }
     if (this.shouldChangePassword != null) {
       json[r'shouldChangePassword'] = this.shouldChangePassword;
     } else {
-    //  json[r'shouldChangePassword'] = null;
+      json[r'shouldChangePassword'] = null;
     }
     if (this.storageLabel != null) {
       json[r'storageLabel'] = this.storageLabel;
     } else {
-    //  json[r'storageLabel'] = null;
+      json[r'storageLabel'] = null;
     }
     return json;
   }
@@ -165,9 +165,15 @@ class UserAdminUpdateDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static UserAdminUpdateDto? fromJson(dynamic value) {
-    upgradeDto(value, "UserAdminUpdateDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return UserAdminUpdateDto(
         avatarColor: UserAvatarColor.fromJson(json[r'avatarColor']),

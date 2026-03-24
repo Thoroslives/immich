@@ -60,7 +60,7 @@ class WorkflowFilterResponseDto {
     if (this.filterConfig != null) {
       json[r'filterConfig'] = this.filterConfig;
     } else {
-    //  json[r'filterConfig'] = null;
+      json[r'filterConfig'] = null;
     }
       json[r'id'] = this.id;
       json[r'order'] = this.order;
@@ -73,9 +73,24 @@ class WorkflowFilterResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static WorkflowFilterResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "WorkflowFilterResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'filterConfig'), 'Required key "WorkflowFilterResponseDto[filterConfig]" is missing from JSON.');
+        assert(json.containsKey(r'id'), 'Required key "WorkflowFilterResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "WorkflowFilterResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'order'), 'Required key "WorkflowFilterResponseDto[order]" is missing from JSON.');
+        assert(json[r'order'] != null, 'Required key "WorkflowFilterResponseDto[order]" has a null value in JSON.');
+        assert(json.containsKey(r'pluginFilterId'), 'Required key "WorkflowFilterResponseDto[pluginFilterId]" is missing from JSON.');
+        assert(json[r'pluginFilterId'] != null, 'Required key "WorkflowFilterResponseDto[pluginFilterId]" has a null value in JSON.');
+        assert(json.containsKey(r'workflowId'), 'Required key "WorkflowFilterResponseDto[workflowId]" is missing from JSON.');
+        assert(json[r'workflowId'] != null, 'Required key "WorkflowFilterResponseDto[workflowId]" has a null value in JSON.');
+        return true;
+      }());
 
       return WorkflowFilterResponseDto(
         filterConfig: mapValueOfType<Object>(json, r'filterConfig'),

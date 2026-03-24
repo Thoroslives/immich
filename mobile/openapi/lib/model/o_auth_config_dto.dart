@@ -60,13 +60,13 @@ class OAuthConfigDto {
     if (this.codeChallenge != null) {
       json[r'codeChallenge'] = this.codeChallenge;
     } else {
-    //  json[r'codeChallenge'] = null;
+      json[r'codeChallenge'] = null;
     }
       json[r'redirectUri'] = this.redirectUri;
     if (this.state != null) {
       json[r'state'] = this.state;
     } else {
-    //  json[r'state'] = null;
+      json[r'state'] = null;
     }
     return json;
   }
@@ -75,9 +75,17 @@ class OAuthConfigDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static OAuthConfigDto? fromJson(dynamic value) {
-    upgradeDto(value, "OAuthConfigDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'redirectUri'), 'Required key "OAuthConfigDto[redirectUri]" is missing from JSON.');
+        assert(json[r'redirectUri'] != null, 'Required key "OAuthConfigDto[redirectUri]" has a null value in JSON.');
+        return true;
+      }());
 
       return OAuthConfigDto(
         codeChallenge: mapValueOfType<String>(json, r'codeChallenge'),

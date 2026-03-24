@@ -76,17 +76,17 @@ class MaintenanceStatusResponseDto {
     if (this.error != null) {
       json[r'error'] = this.error;
     } else {
-    //  json[r'error'] = null;
+      json[r'error'] = null;
     }
     if (this.progress != null) {
       json[r'progress'] = this.progress;
     } else {
-    //  json[r'progress'] = null;
+      json[r'progress'] = null;
     }
     if (this.task != null) {
       json[r'task'] = this.task;
     } else {
-    //  json[r'task'] = null;
+      json[r'task'] = null;
     }
     return json;
   }
@@ -95,9 +95,19 @@ class MaintenanceStatusResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static MaintenanceStatusResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "MaintenanceStatusResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'action'), 'Required key "MaintenanceStatusResponseDto[action]" is missing from JSON.');
+        assert(json[r'action'] != null, 'Required key "MaintenanceStatusResponseDto[action]" has a null value in JSON.');
+        assert(json.containsKey(r'active'), 'Required key "MaintenanceStatusResponseDto[active]" is missing from JSON.');
+        assert(json[r'active'] != null, 'Required key "MaintenanceStatusResponseDto[active]" has a null value in JSON.');
+        return true;
+      }());
 
       return MaintenanceStatusResponseDto(
         action: MaintenanceAction.fromJson(json[r'action'])!,

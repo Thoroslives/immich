@@ -55,9 +55,21 @@ class LicenseResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static LicenseResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "LicenseResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'activatedAt'), 'Required key "LicenseResponseDto[activatedAt]" is missing from JSON.');
+        assert(json[r'activatedAt'] != null, 'Required key "LicenseResponseDto[activatedAt]" has a null value in JSON.');
+        assert(json.containsKey(r'activationKey'), 'Required key "LicenseResponseDto[activationKey]" is missing from JSON.');
+        assert(json[r'activationKey'] != null, 'Required key "LicenseResponseDto[activationKey]" has a null value in JSON.');
+        assert(json.containsKey(r'licenseKey'), 'Required key "LicenseResponseDto[licenseKey]" is missing from JSON.');
+        assert(json[r'licenseKey'] != null, 'Required key "LicenseResponseDto[licenseKey]" has a null value in JSON.');
+        return true;
+      }());
 
       return LicenseResponseDto(
         activatedAt: mapDateTime(json, r'activatedAt', r'')!,

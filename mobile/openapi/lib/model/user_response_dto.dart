@@ -76,9 +76,27 @@ class UserResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static UserResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "UserResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'avatarColor'), 'Required key "UserResponseDto[avatarColor]" is missing from JSON.');
+        assert(json[r'avatarColor'] != null, 'Required key "UserResponseDto[avatarColor]" has a null value in JSON.');
+        assert(json.containsKey(r'email'), 'Required key "UserResponseDto[email]" is missing from JSON.');
+        assert(json[r'email'] != null, 'Required key "UserResponseDto[email]" has a null value in JSON.');
+        assert(json.containsKey(r'id'), 'Required key "UserResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "UserResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'name'), 'Required key "UserResponseDto[name]" is missing from JSON.');
+        assert(json[r'name'] != null, 'Required key "UserResponseDto[name]" has a null value in JSON.');
+        assert(json.containsKey(r'profileChangedAt'), 'Required key "UserResponseDto[profileChangedAt]" is missing from JSON.');
+        assert(json[r'profileChangedAt'] != null, 'Required key "UserResponseDto[profileChangedAt]" has a null value in JSON.');
+        assert(json.containsKey(r'profileImagePath'), 'Required key "UserResponseDto[profileImagePath]" is missing from JSON.');
+        assert(json[r'profileImagePath'] != null, 'Required key "UserResponseDto[profileImagePath]" has a null value in JSON.');
+        return true;
+      }());
 
       return UserResponseDto(
         avatarColor: UserAvatarColor.fromJson(json[r'avatarColor'])!,

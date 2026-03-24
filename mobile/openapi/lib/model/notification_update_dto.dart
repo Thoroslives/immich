@@ -36,7 +36,7 @@ class NotificationUpdateDto {
     if (this.readAt != null) {
       json[r'readAt'] = this.readAt!.toUtc().toIso8601String();
     } else {
-    //  json[r'readAt'] = null;
+      json[r'readAt'] = null;
     }
     return json;
   }
@@ -45,9 +45,15 @@ class NotificationUpdateDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static NotificationUpdateDto? fromJson(dynamic value) {
-    upgradeDto(value, "NotificationUpdateDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return NotificationUpdateDto(
         readAt: mapDateTime(json, r'readAt', r''),

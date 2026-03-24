@@ -66,12 +66,12 @@ class MapMarkerResponseDto {
     if (this.city != null) {
       json[r'city'] = this.city;
     } else {
-    //  json[r'city'] = null;
+      json[r'city'] = null;
     }
     if (this.country != null) {
       json[r'country'] = this.country;
     } else {
-    //  json[r'country'] = null;
+      json[r'country'] = null;
     }
       json[r'id'] = this.id;
       json[r'lat'] = this.lat;
@@ -79,7 +79,7 @@ class MapMarkerResponseDto {
     if (this.state != null) {
       json[r'state'] = this.state;
     } else {
-    //  json[r'state'] = null;
+      json[r'state'] = null;
     }
     return json;
   }
@@ -88,16 +88,31 @@ class MapMarkerResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static MapMarkerResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "MapMarkerResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'city'), 'Required key "MapMarkerResponseDto[city]" is missing from JSON.');
+        assert(json.containsKey(r'country'), 'Required key "MapMarkerResponseDto[country]" is missing from JSON.');
+        assert(json.containsKey(r'id'), 'Required key "MapMarkerResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "MapMarkerResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'lat'), 'Required key "MapMarkerResponseDto[lat]" is missing from JSON.');
+        assert(json[r'lat'] != null, 'Required key "MapMarkerResponseDto[lat]" has a null value in JSON.');
+        assert(json.containsKey(r'lon'), 'Required key "MapMarkerResponseDto[lon]" is missing from JSON.');
+        assert(json[r'lon'] != null, 'Required key "MapMarkerResponseDto[lon]" has a null value in JSON.');
+        assert(json.containsKey(r'state'), 'Required key "MapMarkerResponseDto[state]" is missing from JSON.');
+        return true;
+      }());
 
       return MapMarkerResponseDto(
         city: mapValueOfType<String>(json, r'city'),
         country: mapValueOfType<String>(json, r'country'),
         id: mapValueOfType<String>(json, r'id')!,
-        lat: (mapValueOfType<num>(json, r'lat')!).toDouble(),
-        lon: (mapValueOfType<num>(json, r'lon')!).toDouble(),
+        lat: mapValueOfType<double>(json, r'lat')!,
+        lon: mapValueOfType<double>(json, r'lon')!,
         state: mapValueOfType<String>(json, r'state'),
       );
     }

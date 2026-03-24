@@ -76,7 +76,7 @@ class PluginActionResponseDto {
     if (this.schema != null) {
       json[r'schema'] = this.schema;
     } else {
-    //  json[r'schema'] = null;
+      json[r'schema'] = null;
     }
       json[r'supportedContexts'] = this.supportedContexts;
       json[r'title'] = this.title;
@@ -87,9 +87,28 @@ class PluginActionResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static PluginActionResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "PluginActionResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'description'), 'Required key "PluginActionResponseDto[description]" is missing from JSON.');
+        assert(json[r'description'] != null, 'Required key "PluginActionResponseDto[description]" has a null value in JSON.');
+        assert(json.containsKey(r'id'), 'Required key "PluginActionResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "PluginActionResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'methodName'), 'Required key "PluginActionResponseDto[methodName]" is missing from JSON.');
+        assert(json[r'methodName'] != null, 'Required key "PluginActionResponseDto[methodName]" has a null value in JSON.');
+        assert(json.containsKey(r'pluginId'), 'Required key "PluginActionResponseDto[pluginId]" is missing from JSON.');
+        assert(json[r'pluginId'] != null, 'Required key "PluginActionResponseDto[pluginId]" has a null value in JSON.');
+        assert(json.containsKey(r'schema'), 'Required key "PluginActionResponseDto[schema]" is missing from JSON.');
+        assert(json.containsKey(r'supportedContexts'), 'Required key "PluginActionResponseDto[supportedContexts]" is missing from JSON.');
+        assert(json[r'supportedContexts'] != null, 'Required key "PluginActionResponseDto[supportedContexts]" has a null value in JSON.');
+        assert(json.containsKey(r'title'), 'Required key "PluginActionResponseDto[title]" is missing from JSON.');
+        assert(json[r'title'] != null, 'Required key "PluginActionResponseDto[title]" has a null value in JSON.');
+        return true;
+      }());
 
       return PluginActionResponseDto(
         description: mapValueOfType<String>(json, r'description')!,

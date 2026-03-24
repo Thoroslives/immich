@@ -67,12 +67,12 @@ class ActivityCreateDto {
     if (this.assetId != null) {
       json[r'assetId'] = this.assetId;
     } else {
-    //  json[r'assetId'] = null;
+      json[r'assetId'] = null;
     }
     if (this.comment != null) {
       json[r'comment'] = this.comment;
     } else {
-    //  json[r'comment'] = null;
+      json[r'comment'] = null;
     }
       json[r'type'] = this.type;
     return json;
@@ -82,9 +82,19 @@ class ActivityCreateDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static ActivityCreateDto? fromJson(dynamic value) {
-    upgradeDto(value, "ActivityCreateDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'albumId'), 'Required key "ActivityCreateDto[albumId]" is missing from JSON.');
+        assert(json[r'albumId'] != null, 'Required key "ActivityCreateDto[albumId]" has a null value in JSON.');
+        assert(json.containsKey(r'type'), 'Required key "ActivityCreateDto[type]" is missing from JSON.');
+        assert(json[r'type'] != null, 'Required key "ActivityCreateDto[type]" has a null value in JSON.');
+        return true;
+      }());
 
       return ActivityCreateDto(
         albumId: mapValueOfType<String>(json, r'albumId')!,

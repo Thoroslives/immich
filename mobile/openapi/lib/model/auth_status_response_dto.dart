@@ -72,7 +72,7 @@ class AuthStatusResponseDto {
     if (this.expiresAt != null) {
       json[r'expiresAt'] = this.expiresAt;
     } else {
-    //  json[r'expiresAt'] = null;
+      json[r'expiresAt'] = null;
     }
       json[r'isElevated'] = this.isElevated;
       json[r'password'] = this.password;
@@ -80,7 +80,7 @@ class AuthStatusResponseDto {
     if (this.pinExpiresAt != null) {
       json[r'pinExpiresAt'] = this.pinExpiresAt;
     } else {
-    //  json[r'pinExpiresAt'] = null;
+      json[r'pinExpiresAt'] = null;
     }
     return json;
   }
@@ -89,9 +89,21 @@ class AuthStatusResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static AuthStatusResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "AuthStatusResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'isElevated'), 'Required key "AuthStatusResponseDto[isElevated]" is missing from JSON.');
+        assert(json[r'isElevated'] != null, 'Required key "AuthStatusResponseDto[isElevated]" has a null value in JSON.');
+        assert(json.containsKey(r'password'), 'Required key "AuthStatusResponseDto[password]" is missing from JSON.');
+        assert(json[r'password'] != null, 'Required key "AuthStatusResponseDto[password]" has a null value in JSON.');
+        assert(json.containsKey(r'pinCode'), 'Required key "AuthStatusResponseDto[pinCode]" is missing from JSON.');
+        assert(json[r'pinCode'] != null, 'Required key "AuthStatusResponseDto[pinCode]" has a null value in JSON.');
+        return true;
+      }());
 
       return AuthStatusResponseDto(
         expiresAt: mapValueOfType<String>(json, r'expiresAt'),

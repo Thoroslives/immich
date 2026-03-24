@@ -48,9 +48,19 @@ class AssetDeltaSyncDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static AssetDeltaSyncDto? fromJson(dynamic value) {
-    upgradeDto(value, "AssetDeltaSyncDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'updatedAfter'), 'Required key "AssetDeltaSyncDto[updatedAfter]" is missing from JSON.');
+        assert(json[r'updatedAfter'] != null, 'Required key "AssetDeltaSyncDto[updatedAfter]" has a null value in JSON.');
+        assert(json.containsKey(r'userIds'), 'Required key "AssetDeltaSyncDto[userIds]" is missing from JSON.');
+        assert(json[r'userIds'] != null, 'Required key "AssetDeltaSyncDto[userIds]" has a null value in JSON.');
+        return true;
+      }());
 
       return AssetDeltaSyncDto(
         updatedAfter: mapDateTime(json, r'updatedAfter', r'')!,

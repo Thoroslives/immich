@@ -102,35 +102,35 @@ class SharedLinkCreateDto {
     if (this.albumId != null) {
       json[r'albumId'] = this.albumId;
     } else {
-    //  json[r'albumId'] = null;
+      json[r'albumId'] = null;
     }
       json[r'allowDownload'] = this.allowDownload;
     if (this.allowUpload != null) {
       json[r'allowUpload'] = this.allowUpload;
     } else {
-    //  json[r'allowUpload'] = null;
+      json[r'allowUpload'] = null;
     }
       json[r'assetIds'] = this.assetIds;
     if (this.description != null) {
       json[r'description'] = this.description;
     } else {
-    //  json[r'description'] = null;
+      json[r'description'] = null;
     }
     if (this.expiresAt != null) {
       json[r'expiresAt'] = this.expiresAt!.toUtc().toIso8601String();
     } else {
-    //  json[r'expiresAt'] = null;
+      json[r'expiresAt'] = null;
     }
     if (this.password != null) {
       json[r'password'] = this.password;
     } else {
-    //  json[r'password'] = null;
+      json[r'password'] = null;
     }
       json[r'showMetadata'] = this.showMetadata;
     if (this.slug != null) {
       json[r'slug'] = this.slug;
     } else {
-    //  json[r'slug'] = null;
+      json[r'slug'] = null;
     }
       json[r'type'] = this.type;
     return json;
@@ -140,9 +140,17 @@ class SharedLinkCreateDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static SharedLinkCreateDto? fromJson(dynamic value) {
-    upgradeDto(value, "SharedLinkCreateDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'type'), 'Required key "SharedLinkCreateDto[type]" is missing from JSON.');
+        assert(json[r'type'] != null, 'Required key "SharedLinkCreateDto[type]" has a null value in JSON.');
+        return true;
+      }());
 
       return SharedLinkCreateDto(
         albumId: mapValueOfType<String>(json, r'albumId'),

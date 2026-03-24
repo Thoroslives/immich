@@ -90,9 +90,31 @@ class LoginResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static LoginResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "LoginResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'accessToken'), 'Required key "LoginResponseDto[accessToken]" is missing from JSON.');
+        assert(json[r'accessToken'] != null, 'Required key "LoginResponseDto[accessToken]" has a null value in JSON.');
+        assert(json.containsKey(r'isAdmin'), 'Required key "LoginResponseDto[isAdmin]" is missing from JSON.');
+        assert(json[r'isAdmin'] != null, 'Required key "LoginResponseDto[isAdmin]" has a null value in JSON.');
+        assert(json.containsKey(r'isOnboarded'), 'Required key "LoginResponseDto[isOnboarded]" is missing from JSON.');
+        assert(json[r'isOnboarded'] != null, 'Required key "LoginResponseDto[isOnboarded]" has a null value in JSON.');
+        assert(json.containsKey(r'name'), 'Required key "LoginResponseDto[name]" is missing from JSON.');
+        assert(json[r'name'] != null, 'Required key "LoginResponseDto[name]" has a null value in JSON.');
+        assert(json.containsKey(r'profileImagePath'), 'Required key "LoginResponseDto[profileImagePath]" is missing from JSON.');
+        assert(json[r'profileImagePath'] != null, 'Required key "LoginResponseDto[profileImagePath]" has a null value in JSON.');
+        assert(json.containsKey(r'shouldChangePassword'), 'Required key "LoginResponseDto[shouldChangePassword]" is missing from JSON.');
+        assert(json[r'shouldChangePassword'] != null, 'Required key "LoginResponseDto[shouldChangePassword]" has a null value in JSON.');
+        assert(json.containsKey(r'userEmail'), 'Required key "LoginResponseDto[userEmail]" is missing from JSON.');
+        assert(json[r'userEmail'] != null, 'Required key "LoginResponseDto[userEmail]" has a null value in JSON.');
+        assert(json.containsKey(r'userId'), 'Required key "LoginResponseDto[userId]" is missing from JSON.');
+        assert(json[r'userId'] != null, 'Required key "LoginResponseDto[userId]" has a null value in JSON.');
+        return true;
+      }());
 
       return LoginResponseDto(
         accessToken: mapValueOfType<String>(json, r'accessToken')!,

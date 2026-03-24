@@ -1,26 +1,18 @@
 #!/usr/bin/env bash
-OPENAPI_GENERATOR_VERSION=v7.12.0
+OPENAPI_GENERATOR_VERSION=v7.21.0
 
 # usage: ./bin/generate-open-api.sh
 
 function dart {
   rm -rf ../mobile/openapi
-  cd ./templates/mobile/serialization/native
-  wget -O native_class.mustache https://raw.githubusercontent.com/OpenAPITools/openapi-generator/$OPENAPI_GENERATOR_VERSION/modules/openapi-generator/src/main/resources/dart2/serialization/native/native_class.mustache
-  patch --no-backup-if-mismatch -u native_class.mustache <native_class.mustache.patch
-  patch --no-backup-if-mismatch -u native_class.mustache <native_class_nullable_items_in_arrays.patch
 
-  cd ../../
-  wget -O api.mustache https://raw.githubusercontent.com/OpenAPITools/openapi-generator/$OPENAPI_GENERATOR_VERSION/modules/openapi-generator/src/main/resources/dart2/api.mustache
-  patch --no-backup-if-mismatch -u api.mustache <api.mustache.patch
+  cd ./templates/mobile
+  curl -fsSL -o api.mustache https://raw.githubusercontent.com/OpenAPITools/openapi-generator/$OPENAPI_GENERATOR_VERSION/modules/openapi-generator/src/main/resources/dart2/api.mustache
+  patch --forward --no-backup-if-mismatch -u api.mustache <api.mustache.patch
 
-  cd ../../
-  pnpm dlx @openapitools/openapi-generator-cli generate -g dart -i ./immich-openapi-specs.json -o ../mobile/openapi -t ./templates/mobile
+  cd ../..
+  pnpm dlx @openapitools/openapi-generator-cli generate -g dart -i ./immich-openapi-specs.json -o ../mobile/openapi -t ./templates/mobile --additional-properties=useOptional=true,patchOnly=true
 
-  # Post generate patches
-  patch --no-backup-if-mismatch -u ../mobile/openapi/lib/api_client.dart <./patch/api_client.dart.patch
-  patch --no-backup-if-mismatch -u ../mobile/openapi/lib/api.dart <./patch/api.dart.patch
-  patch --no-backup-if-mismatch -u ../mobile/openapi/pubspec.yaml <./patch/pubspec_immich_mobile.yaml.patch
   # Don't include analysis_options.yaml for the generated openapi files
   # so that language servers can properly exclude the mobile/openapi directory
   rm ../mobile/openapi/analysis_options.yaml

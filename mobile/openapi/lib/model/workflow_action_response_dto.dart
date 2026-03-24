@@ -60,7 +60,7 @@ class WorkflowActionResponseDto {
     if (this.actionConfig != null) {
       json[r'actionConfig'] = this.actionConfig;
     } else {
-    //  json[r'actionConfig'] = null;
+      json[r'actionConfig'] = null;
     }
       json[r'id'] = this.id;
       json[r'order'] = this.order;
@@ -73,9 +73,24 @@ class WorkflowActionResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static WorkflowActionResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "WorkflowActionResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'actionConfig'), 'Required key "WorkflowActionResponseDto[actionConfig]" is missing from JSON.');
+        assert(json.containsKey(r'id'), 'Required key "WorkflowActionResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "WorkflowActionResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'order'), 'Required key "WorkflowActionResponseDto[order]" is missing from JSON.');
+        assert(json[r'order'] != null, 'Required key "WorkflowActionResponseDto[order]" has a null value in JSON.');
+        assert(json.containsKey(r'pluginActionId'), 'Required key "WorkflowActionResponseDto[pluginActionId]" is missing from JSON.');
+        assert(json[r'pluginActionId'] != null, 'Required key "WorkflowActionResponseDto[pluginActionId]" has a null value in JSON.');
+        assert(json.containsKey(r'workflowId'), 'Required key "WorkflowActionResponseDto[workflowId]" is missing from JSON.');
+        assert(json[r'workflowId'] != null, 'Required key "WorkflowActionResponseDto[workflowId]" has a null value in JSON.');
+        return true;
+      }());
 
       return WorkflowActionResponseDto(
         actionConfig: mapValueOfType<Object>(json, r'actionConfig'),

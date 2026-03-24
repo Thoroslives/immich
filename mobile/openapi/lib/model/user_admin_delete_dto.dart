@@ -42,7 +42,7 @@ class UserAdminDeleteDto {
     if (this.force != null) {
       json[r'force'] = this.force;
     } else {
-    //  json[r'force'] = null;
+      json[r'force'] = null;
     }
     return json;
   }
@@ -51,9 +51,15 @@ class UserAdminDeleteDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static UserAdminDeleteDto? fromJson(dynamic value) {
-    upgradeDto(value, "UserAdminDeleteDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return UserAdminDeleteDto(
         force: mapValueOfType<bool>(json, r'force'),

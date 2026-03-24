@@ -91,7 +91,7 @@ class AssetFaceWithoutPersonResponseDto {
     if (this.sourceType != null) {
       json[r'sourceType'] = this.sourceType;
     } else {
-    //  json[r'sourceType'] = null;
+      json[r'sourceType'] = null;
     }
     return json;
   }
@@ -100,9 +100,29 @@ class AssetFaceWithoutPersonResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static AssetFaceWithoutPersonResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "AssetFaceWithoutPersonResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'boundingBoxX1'), 'Required key "AssetFaceWithoutPersonResponseDto[boundingBoxX1]" is missing from JSON.');
+        assert(json[r'boundingBoxX1'] != null, 'Required key "AssetFaceWithoutPersonResponseDto[boundingBoxX1]" has a null value in JSON.');
+        assert(json.containsKey(r'boundingBoxX2'), 'Required key "AssetFaceWithoutPersonResponseDto[boundingBoxX2]" is missing from JSON.');
+        assert(json[r'boundingBoxX2'] != null, 'Required key "AssetFaceWithoutPersonResponseDto[boundingBoxX2]" has a null value in JSON.');
+        assert(json.containsKey(r'boundingBoxY1'), 'Required key "AssetFaceWithoutPersonResponseDto[boundingBoxY1]" is missing from JSON.');
+        assert(json[r'boundingBoxY1'] != null, 'Required key "AssetFaceWithoutPersonResponseDto[boundingBoxY1]" has a null value in JSON.');
+        assert(json.containsKey(r'boundingBoxY2'), 'Required key "AssetFaceWithoutPersonResponseDto[boundingBoxY2]" is missing from JSON.');
+        assert(json[r'boundingBoxY2'] != null, 'Required key "AssetFaceWithoutPersonResponseDto[boundingBoxY2]" has a null value in JSON.');
+        assert(json.containsKey(r'id'), 'Required key "AssetFaceWithoutPersonResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "AssetFaceWithoutPersonResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'imageHeight'), 'Required key "AssetFaceWithoutPersonResponseDto[imageHeight]" is missing from JSON.');
+        assert(json[r'imageHeight'] != null, 'Required key "AssetFaceWithoutPersonResponseDto[imageHeight]" has a null value in JSON.');
+        assert(json.containsKey(r'imageWidth'), 'Required key "AssetFaceWithoutPersonResponseDto[imageWidth]" is missing from JSON.');
+        assert(json[r'imageWidth'] != null, 'Required key "AssetFaceWithoutPersonResponseDto[imageWidth]" has a null value in JSON.');
+        return true;
+      }());
 
       return AssetFaceWithoutPersonResponseDto(
         boundingBoxX1: mapValueOfType<int>(json, r'boundingBoxX1')!,

@@ -134,7 +134,7 @@ class UserAdminResponseDto {
     if (this.deletedAt != null) {
       json[r'deletedAt'] = this.deletedAt!.toUtc().toIso8601String();
     } else {
-    //  json[r'deletedAt'] = null;
+      json[r'deletedAt'] = null;
     }
       json[r'email'] = this.email;
       json[r'id'] = this.id;
@@ -142,7 +142,7 @@ class UserAdminResponseDto {
     if (this.license != null) {
       json[r'license'] = this.license;
     } else {
-    //  json[r'license'] = null;
+      json[r'license'] = null;
     }
       json[r'name'] = this.name;
       json[r'oauthId'] = this.oauthId;
@@ -151,19 +151,19 @@ class UserAdminResponseDto {
     if (this.quotaSizeInBytes != null) {
       json[r'quotaSizeInBytes'] = this.quotaSizeInBytes;
     } else {
-    //  json[r'quotaSizeInBytes'] = null;
+      json[r'quotaSizeInBytes'] = null;
     }
     if (this.quotaUsageInBytes != null) {
       json[r'quotaUsageInBytes'] = this.quotaUsageInBytes;
     } else {
-    //  json[r'quotaUsageInBytes'] = null;
+      json[r'quotaUsageInBytes'] = null;
     }
       json[r'shouldChangePassword'] = this.shouldChangePassword;
       json[r'status'] = this.status;
     if (this.storageLabel != null) {
       json[r'storageLabel'] = this.storageLabel;
     } else {
-    //  json[r'storageLabel'] = null;
+      json[r'storageLabel'] = null;
     }
       json[r'updatedAt'] = this.updatedAt.toUtc().toIso8601String();
     return json;
@@ -173,9 +173,44 @@ class UserAdminResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static UserAdminResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "UserAdminResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'avatarColor'), 'Required key "UserAdminResponseDto[avatarColor]" is missing from JSON.');
+        assert(json[r'avatarColor'] != null, 'Required key "UserAdminResponseDto[avatarColor]" has a null value in JSON.');
+        assert(json.containsKey(r'createdAt'), 'Required key "UserAdminResponseDto[createdAt]" is missing from JSON.');
+        assert(json[r'createdAt'] != null, 'Required key "UserAdminResponseDto[createdAt]" has a null value in JSON.');
+        assert(json.containsKey(r'deletedAt'), 'Required key "UserAdminResponseDto[deletedAt]" is missing from JSON.');
+        assert(json.containsKey(r'email'), 'Required key "UserAdminResponseDto[email]" is missing from JSON.');
+        assert(json[r'email'] != null, 'Required key "UserAdminResponseDto[email]" has a null value in JSON.');
+        assert(json.containsKey(r'id'), 'Required key "UserAdminResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "UserAdminResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'isAdmin'), 'Required key "UserAdminResponseDto[isAdmin]" is missing from JSON.');
+        assert(json[r'isAdmin'] != null, 'Required key "UserAdminResponseDto[isAdmin]" has a null value in JSON.');
+        assert(json.containsKey(r'license'), 'Required key "UserAdminResponseDto[license]" is missing from JSON.');
+        assert(json.containsKey(r'name'), 'Required key "UserAdminResponseDto[name]" is missing from JSON.');
+        assert(json[r'name'] != null, 'Required key "UserAdminResponseDto[name]" has a null value in JSON.');
+        assert(json.containsKey(r'oauthId'), 'Required key "UserAdminResponseDto[oauthId]" is missing from JSON.');
+        assert(json[r'oauthId'] != null, 'Required key "UserAdminResponseDto[oauthId]" has a null value in JSON.');
+        assert(json.containsKey(r'profileChangedAt'), 'Required key "UserAdminResponseDto[profileChangedAt]" is missing from JSON.');
+        assert(json[r'profileChangedAt'] != null, 'Required key "UserAdminResponseDto[profileChangedAt]" has a null value in JSON.');
+        assert(json.containsKey(r'profileImagePath'), 'Required key "UserAdminResponseDto[profileImagePath]" is missing from JSON.');
+        assert(json[r'profileImagePath'] != null, 'Required key "UserAdminResponseDto[profileImagePath]" has a null value in JSON.');
+        assert(json.containsKey(r'quotaSizeInBytes'), 'Required key "UserAdminResponseDto[quotaSizeInBytes]" is missing from JSON.');
+        assert(json.containsKey(r'quotaUsageInBytes'), 'Required key "UserAdminResponseDto[quotaUsageInBytes]" is missing from JSON.');
+        assert(json.containsKey(r'shouldChangePassword'), 'Required key "UserAdminResponseDto[shouldChangePassword]" is missing from JSON.');
+        assert(json[r'shouldChangePassword'] != null, 'Required key "UserAdminResponseDto[shouldChangePassword]" has a null value in JSON.');
+        assert(json.containsKey(r'status'), 'Required key "UserAdminResponseDto[status]" is missing from JSON.');
+        assert(json[r'status'] != null, 'Required key "UserAdminResponseDto[status]" has a null value in JSON.');
+        assert(json.containsKey(r'storageLabel'), 'Required key "UserAdminResponseDto[storageLabel]" is missing from JSON.');
+        assert(json.containsKey(r'updatedAt'), 'Required key "UserAdminResponseDto[updatedAt]" is missing from JSON.');
+        assert(json[r'updatedAt'] != null, 'Required key "UserAdminResponseDto[updatedAt]" has a null value in JSON.');
+        return true;
+      }());
 
       return UserAdminResponseDto(
         avatarColor: UserAvatarColor.fromJson(json[r'avatarColor'])!,

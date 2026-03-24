@@ -42,7 +42,7 @@ class MaintenanceLoginDto {
     if (this.token != null) {
       json[r'token'] = this.token;
     } else {
-    //  json[r'token'] = null;
+      json[r'token'] = null;
     }
     return json;
   }
@@ -51,9 +51,15 @@ class MaintenanceLoginDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static MaintenanceLoginDto? fromJson(dynamic value) {
-    upgradeDto(value, "MaintenanceLoginDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return MaintenanceLoginDto(
         token: mapValueOfType<String>(json, r'token'),

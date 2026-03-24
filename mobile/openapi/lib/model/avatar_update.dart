@@ -42,7 +42,7 @@ class AvatarUpdate {
     if (this.color != null) {
       json[r'color'] = this.color;
     } else {
-    //  json[r'color'] = null;
+      json[r'color'] = null;
     }
     return json;
   }
@@ -51,9 +51,15 @@ class AvatarUpdate {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static AvatarUpdate? fromJson(dynamic value) {
-    upgradeDto(value, "AvatarUpdate");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return AvatarUpdate(
         color: UserAvatarColor.fromJson(json[r'color']),

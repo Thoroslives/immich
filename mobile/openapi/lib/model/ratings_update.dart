@@ -42,7 +42,7 @@ class RatingsUpdate {
     if (this.enabled != null) {
       json[r'enabled'] = this.enabled;
     } else {
-    //  json[r'enabled'] = null;
+      json[r'enabled'] = null;
     }
     return json;
   }
@@ -51,9 +51,15 @@ class RatingsUpdate {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static RatingsUpdate? fromJson(dynamic value) {
-    upgradeDto(value, "RatingsUpdate");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return RatingsUpdate(
         enabled: mapValueOfType<bool>(json, r'enabled'),

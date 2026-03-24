@@ -61,7 +61,7 @@ class QueueJobResponseDto {
     if (this.id != null) {
       json[r'id'] = this.id;
     } else {
-    //  json[r'id'] = null;
+      json[r'id'] = null;
     }
       json[r'name'] = this.name;
       json[r'timestamp'] = this.timestamp;
@@ -72,9 +72,21 @@ class QueueJobResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static QueueJobResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "QueueJobResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'data'), 'Required key "QueueJobResponseDto[data]" is missing from JSON.');
+        assert(json[r'data'] != null, 'Required key "QueueJobResponseDto[data]" has a null value in JSON.');
+        assert(json.containsKey(r'name'), 'Required key "QueueJobResponseDto[name]" is missing from JSON.');
+        assert(json[r'name'] != null, 'Required key "QueueJobResponseDto[name]" has a null value in JSON.');
+        assert(json.containsKey(r'timestamp'), 'Required key "QueueJobResponseDto[timestamp]" is missing from JSON.');
+        assert(json[r'timestamp'] != null, 'Required key "QueueJobResponseDto[timestamp]" has a null value in JSON.');
+        return true;
+      }());
 
       return QueueJobResponseDto(
         data: mapValueOfType<Object>(json, r'data')!,

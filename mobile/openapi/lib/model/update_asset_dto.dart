@@ -117,42 +117,42 @@ class UpdateAssetDto {
     if (this.dateTimeOriginal != null) {
       json[r'dateTimeOriginal'] = this.dateTimeOriginal;
     } else {
-    //  json[r'dateTimeOriginal'] = null;
+      json[r'dateTimeOriginal'] = null;
     }
     if (this.description != null) {
       json[r'description'] = this.description;
     } else {
-    //  json[r'description'] = null;
+      json[r'description'] = null;
     }
     if (this.isFavorite != null) {
       json[r'isFavorite'] = this.isFavorite;
     } else {
-    //  json[r'isFavorite'] = null;
+      json[r'isFavorite'] = null;
     }
     if (this.latitude != null) {
       json[r'latitude'] = this.latitude;
     } else {
-    //  json[r'latitude'] = null;
+      json[r'latitude'] = null;
     }
     if (this.livePhotoVideoId != null) {
       json[r'livePhotoVideoId'] = this.livePhotoVideoId;
     } else {
-    //  json[r'livePhotoVideoId'] = null;
+      json[r'livePhotoVideoId'] = null;
     }
     if (this.longitude != null) {
       json[r'longitude'] = this.longitude;
     } else {
-    //  json[r'longitude'] = null;
+      json[r'longitude'] = null;
     }
     if (this.rating != null) {
       json[r'rating'] = this.rating;
     } else {
-    //  json[r'rating'] = null;
+      json[r'rating'] = null;
     }
     if (this.visibility != null) {
       json[r'visibility'] = this.visibility;
     } else {
-    //  json[r'visibility'] = null;
+      json[r'visibility'] = null;
     }
     return json;
   }
@@ -161,9 +161,15 @@ class UpdateAssetDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static UpdateAssetDto? fromJson(dynamic value) {
-    upgradeDto(value, "UpdateAssetDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return UpdateAssetDto(
         dateTimeOriginal: mapValueOfType<String>(json, r'dateTimeOriginal'),

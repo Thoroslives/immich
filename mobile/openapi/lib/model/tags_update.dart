@@ -54,12 +54,12 @@ class TagsUpdate {
     if (this.enabled != null) {
       json[r'enabled'] = this.enabled;
     } else {
-    //  json[r'enabled'] = null;
+      json[r'enabled'] = null;
     }
     if (this.sidebarWeb != null) {
       json[r'sidebarWeb'] = this.sidebarWeb;
     } else {
-    //  json[r'sidebarWeb'] = null;
+      json[r'sidebarWeb'] = null;
     }
     return json;
   }
@@ -68,9 +68,15 @@ class TagsUpdate {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static TagsUpdate? fromJson(dynamic value) {
-    upgradeDto(value, "TagsUpdate");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return TagsUpdate(
         enabled: mapValueOfType<bool>(json, r'enabled'),

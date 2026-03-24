@@ -60,7 +60,7 @@ class PeopleResponseDto {
     if (this.hasNextPage != null) {
       json[r'hasNextPage'] = this.hasNextPage;
     } else {
-    //  json[r'hasNextPage'] = null;
+      json[r'hasNextPage'] = null;
     }
       json[r'hidden'] = this.hidden;
       json[r'people'] = this.people;
@@ -72,9 +72,21 @@ class PeopleResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static PeopleResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "PeopleResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'hidden'), 'Required key "PeopleResponseDto[hidden]" is missing from JSON.');
+        assert(json[r'hidden'] != null, 'Required key "PeopleResponseDto[hidden]" has a null value in JSON.');
+        assert(json.containsKey(r'people'), 'Required key "PeopleResponseDto[people]" is missing from JSON.');
+        assert(json[r'people'] != null, 'Required key "PeopleResponseDto[people]" has a null value in JSON.');
+        assert(json.containsKey(r'total'), 'Required key "PeopleResponseDto[total]" is missing from JSON.');
+        assert(json[r'total'] != null, 'Required key "PeopleResponseDto[total]" has a null value in JSON.');
+        return true;
+      }());
 
       return PeopleResponseDto(
         hasNextPage: mapValueOfType<bool>(json, r'hasNextPage'),

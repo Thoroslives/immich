@@ -96,7 +96,7 @@ class SessionCreateResponseDto {
     if (this.appVersion != null) {
       json[r'appVersion'] = this.appVersion;
     } else {
-    //  json[r'appVersion'] = null;
+      json[r'appVersion'] = null;
     }
       json[r'createdAt'] = this.createdAt;
       json[r'current'] = this.current;
@@ -105,7 +105,7 @@ class SessionCreateResponseDto {
     if (this.expiresAt != null) {
       json[r'expiresAt'] = this.expiresAt;
     } else {
-    //  json[r'expiresAt'] = null;
+      json[r'expiresAt'] = null;
     }
       json[r'id'] = this.id;
       json[r'isPendingSyncReset'] = this.isPendingSyncReset;
@@ -118,9 +118,32 @@ class SessionCreateResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static SessionCreateResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "SessionCreateResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'appVersion'), 'Required key "SessionCreateResponseDto[appVersion]" is missing from JSON.');
+        assert(json.containsKey(r'createdAt'), 'Required key "SessionCreateResponseDto[createdAt]" is missing from JSON.');
+        assert(json[r'createdAt'] != null, 'Required key "SessionCreateResponseDto[createdAt]" has a null value in JSON.');
+        assert(json.containsKey(r'current'), 'Required key "SessionCreateResponseDto[current]" is missing from JSON.');
+        assert(json[r'current'] != null, 'Required key "SessionCreateResponseDto[current]" has a null value in JSON.');
+        assert(json.containsKey(r'deviceOS'), 'Required key "SessionCreateResponseDto[deviceOS]" is missing from JSON.');
+        assert(json[r'deviceOS'] != null, 'Required key "SessionCreateResponseDto[deviceOS]" has a null value in JSON.');
+        assert(json.containsKey(r'deviceType'), 'Required key "SessionCreateResponseDto[deviceType]" is missing from JSON.');
+        assert(json[r'deviceType'] != null, 'Required key "SessionCreateResponseDto[deviceType]" has a null value in JSON.');
+        assert(json.containsKey(r'id'), 'Required key "SessionCreateResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "SessionCreateResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'isPendingSyncReset'), 'Required key "SessionCreateResponseDto[isPendingSyncReset]" is missing from JSON.');
+        assert(json[r'isPendingSyncReset'] != null, 'Required key "SessionCreateResponseDto[isPendingSyncReset]" has a null value in JSON.');
+        assert(json.containsKey(r'token'), 'Required key "SessionCreateResponseDto[token]" is missing from JSON.');
+        assert(json[r'token'] != null, 'Required key "SessionCreateResponseDto[token]" has a null value in JSON.');
+        assert(json.containsKey(r'updatedAt'), 'Required key "SessionCreateResponseDto[updatedAt]" is missing from JSON.');
+        assert(json[r'updatedAt'] != null, 'Required key "SessionCreateResponseDto[updatedAt]" has a null value in JSON.');
+        return true;
+      }());
 
       return SessionCreateResponseDto(
         appVersion: mapValueOfType<String>(json, r'appVersion'),

@@ -42,7 +42,7 @@ class QueueDeleteDto {
     if (this.failed != null) {
       json[r'failed'] = this.failed;
     } else {
-    //  json[r'failed'] = null;
+      json[r'failed'] = null;
     }
     return json;
   }
@@ -51,9 +51,15 @@ class QueueDeleteDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static QueueDeleteDto? fromJson(dynamic value) {
-    upgradeDto(value, "QueueDeleteDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return QueueDeleteDto(
         failed: mapValueOfType<bool>(json, r'failed'),

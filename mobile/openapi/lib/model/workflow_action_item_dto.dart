@@ -48,7 +48,7 @@ class WorkflowActionItemDto {
     if (this.actionConfig != null) {
       json[r'actionConfig'] = this.actionConfig;
     } else {
-    //  json[r'actionConfig'] = null;
+      json[r'actionConfig'] = null;
     }
       json[r'pluginActionId'] = this.pluginActionId;
     return json;
@@ -58,9 +58,17 @@ class WorkflowActionItemDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static WorkflowActionItemDto? fromJson(dynamic value) {
-    upgradeDto(value, "WorkflowActionItemDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'pluginActionId'), 'Required key "WorkflowActionItemDto[pluginActionId]" is missing from JSON.');
+        assert(json[r'pluginActionId'] != null, 'Required key "WorkflowActionItemDto[pluginActionId]" has a null value in JSON.');
+        return true;
+      }());
 
       return WorkflowActionItemDto(
         actionConfig: mapValueOfType<Object>(json, r'actionConfig'),

@@ -54,13 +54,13 @@ class TagCreateDto {
     if (this.color != null) {
       json[r'color'] = this.color;
     } else {
-    //  json[r'color'] = null;
+      json[r'color'] = null;
     }
       json[r'name'] = this.name;
     if (this.parentId != null) {
       json[r'parentId'] = this.parentId;
     } else {
-    //  json[r'parentId'] = null;
+      json[r'parentId'] = null;
     }
     return json;
   }
@@ -69,9 +69,17 @@ class TagCreateDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static TagCreateDto? fromJson(dynamic value) {
-    upgradeDto(value, "TagCreateDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'name'), 'Required key "TagCreateDto[name]" is missing from JSON.');
+        assert(json[r'name'] != null, 'Required key "TagCreateDto[name]" has a null value in JSON.');
+        return true;
+      }());
 
       return TagCreateDto(
         color: mapValueOfType<String>(json, r'color'),

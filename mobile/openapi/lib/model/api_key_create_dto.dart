@@ -48,7 +48,7 @@ class APIKeyCreateDto {
     if (this.name != null) {
       json[r'name'] = this.name;
     } else {
-    //  json[r'name'] = null;
+      json[r'name'] = null;
     }
       json[r'permissions'] = this.permissions;
     return json;
@@ -58,9 +58,17 @@ class APIKeyCreateDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static APIKeyCreateDto? fromJson(dynamic value) {
-    upgradeDto(value, "APIKeyCreateDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'permissions'), 'Required key "APIKeyCreateDto[permissions]" is missing from JSON.');
+        assert(json[r'permissions'] != null, 'Required key "APIKeyCreateDto[permissions]" has a null value in JSON.');
+        return true;
+      }());
 
       return APIKeyCreateDto(
         name: mapValueOfType<String>(json, r'name'),

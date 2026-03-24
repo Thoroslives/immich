@@ -79,12 +79,12 @@ class WorkflowCreateDto {
     if (this.description != null) {
       json[r'description'] = this.description;
     } else {
-    //  json[r'description'] = null;
+      json[r'description'] = null;
     }
     if (this.enabled != null) {
       json[r'enabled'] = this.enabled;
     } else {
-    //  json[r'enabled'] = null;
+      json[r'enabled'] = null;
     }
       json[r'filters'] = this.filters;
       json[r'name'] = this.name;
@@ -96,9 +96,23 @@ class WorkflowCreateDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static WorkflowCreateDto? fromJson(dynamic value) {
-    upgradeDto(value, "WorkflowCreateDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'actions'), 'Required key "WorkflowCreateDto[actions]" is missing from JSON.');
+        assert(json[r'actions'] != null, 'Required key "WorkflowCreateDto[actions]" has a null value in JSON.');
+        assert(json.containsKey(r'filters'), 'Required key "WorkflowCreateDto[filters]" is missing from JSON.');
+        assert(json[r'filters'] != null, 'Required key "WorkflowCreateDto[filters]" has a null value in JSON.');
+        assert(json.containsKey(r'name'), 'Required key "WorkflowCreateDto[name]" is missing from JSON.');
+        assert(json[r'name'] != null, 'Required key "WorkflowCreateDto[name]" has a null value in JSON.');
+        assert(json.containsKey(r'triggerType'), 'Required key "WorkflowCreateDto[triggerType]" is missing from JSON.');
+        assert(json[r'triggerType'] != null, 'Required key "WorkflowCreateDto[triggerType]" has a null value in JSON.');
+        return true;
+      }());
 
       return WorkflowCreateDto(
         actions: WorkflowActionItemDto.listFromJson(json[r'actions']),

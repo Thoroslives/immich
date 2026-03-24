@@ -69,9 +69,25 @@ class APIKeyResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static APIKeyResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "APIKeyResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'createdAt'), 'Required key "APIKeyResponseDto[createdAt]" is missing from JSON.');
+        assert(json[r'createdAt'] != null, 'Required key "APIKeyResponseDto[createdAt]" has a null value in JSON.');
+        assert(json.containsKey(r'id'), 'Required key "APIKeyResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "APIKeyResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'name'), 'Required key "APIKeyResponseDto[name]" is missing from JSON.');
+        assert(json[r'name'] != null, 'Required key "APIKeyResponseDto[name]" has a null value in JSON.');
+        assert(json.containsKey(r'permissions'), 'Required key "APIKeyResponseDto[permissions]" is missing from JSON.');
+        assert(json[r'permissions'] != null, 'Required key "APIKeyResponseDto[permissions]" has a null value in JSON.');
+        assert(json.containsKey(r'updatedAt'), 'Required key "APIKeyResponseDto[updatedAt]" is missing from JSON.');
+        assert(json[r'updatedAt'] != null, 'Required key "APIKeyResponseDto[updatedAt]" has a null value in JSON.');
+        return true;
+      }());
 
       return APIKeyResponseDto(
         createdAt: mapDateTime(json, r'createdAt', r'')!,

@@ -165,7 +165,7 @@ class AlbumResponseDto {
     if (this.albumThumbnailAssetId != null) {
       json[r'albumThumbnailAssetId'] = this.albumThumbnailAssetId;
     } else {
-    //  json[r'albumThumbnailAssetId'] = null;
+      json[r'albumThumbnailAssetId'] = null;
     }
       json[r'albumUsers'] = this.albumUsers;
       json[r'assetCount'] = this.assetCount;
@@ -176,7 +176,7 @@ class AlbumResponseDto {
     if (this.endDate != null) {
       json[r'endDate'] = this.endDate!.toUtc().toIso8601String();
     } else {
-    //  json[r'endDate'] = null;
+      json[r'endDate'] = null;
     }
       json[r'hasSharedLink'] = this.hasSharedLink;
       json[r'id'] = this.id;
@@ -184,12 +184,12 @@ class AlbumResponseDto {
     if (this.lastModifiedAssetTimestamp != null) {
       json[r'lastModifiedAssetTimestamp'] = this.lastModifiedAssetTimestamp!.toUtc().toIso8601String();
     } else {
-    //  json[r'lastModifiedAssetTimestamp'] = null;
+      json[r'lastModifiedAssetTimestamp'] = null;
     }
     if (this.order != null) {
       json[r'order'] = this.order;
     } else {
-    //  json[r'order'] = null;
+      json[r'order'] = null;
     }
       json[r'owner'] = this.owner;
       json[r'ownerId'] = this.ownerId;
@@ -197,7 +197,7 @@ class AlbumResponseDto {
     if (this.startDate != null) {
       json[r'startDate'] = this.startDate!.toUtc().toIso8601String();
     } else {
-    //  json[r'startDate'] = null;
+      json[r'startDate'] = null;
     }
       json[r'updatedAt'] = this.updatedAt.toUtc().toIso8601String();
     return json;
@@ -207,9 +207,42 @@ class AlbumResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static AlbumResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "AlbumResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'albumName'), 'Required key "AlbumResponseDto[albumName]" is missing from JSON.');
+        assert(json[r'albumName'] != null, 'Required key "AlbumResponseDto[albumName]" has a null value in JSON.');
+        assert(json.containsKey(r'albumThumbnailAssetId'), 'Required key "AlbumResponseDto[albumThumbnailAssetId]" is missing from JSON.');
+        assert(json.containsKey(r'albumUsers'), 'Required key "AlbumResponseDto[albumUsers]" is missing from JSON.');
+        assert(json[r'albumUsers'] != null, 'Required key "AlbumResponseDto[albumUsers]" has a null value in JSON.');
+        assert(json.containsKey(r'assetCount'), 'Required key "AlbumResponseDto[assetCount]" is missing from JSON.');
+        assert(json[r'assetCount'] != null, 'Required key "AlbumResponseDto[assetCount]" has a null value in JSON.');
+        assert(json.containsKey(r'assets'), 'Required key "AlbumResponseDto[assets]" is missing from JSON.');
+        assert(json[r'assets'] != null, 'Required key "AlbumResponseDto[assets]" has a null value in JSON.');
+        assert(json.containsKey(r'createdAt'), 'Required key "AlbumResponseDto[createdAt]" is missing from JSON.');
+        assert(json[r'createdAt'] != null, 'Required key "AlbumResponseDto[createdAt]" has a null value in JSON.');
+        assert(json.containsKey(r'description'), 'Required key "AlbumResponseDto[description]" is missing from JSON.');
+        assert(json[r'description'] != null, 'Required key "AlbumResponseDto[description]" has a null value in JSON.');
+        assert(json.containsKey(r'hasSharedLink'), 'Required key "AlbumResponseDto[hasSharedLink]" is missing from JSON.');
+        assert(json[r'hasSharedLink'] != null, 'Required key "AlbumResponseDto[hasSharedLink]" has a null value in JSON.');
+        assert(json.containsKey(r'id'), 'Required key "AlbumResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "AlbumResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'isActivityEnabled'), 'Required key "AlbumResponseDto[isActivityEnabled]" is missing from JSON.');
+        assert(json[r'isActivityEnabled'] != null, 'Required key "AlbumResponseDto[isActivityEnabled]" has a null value in JSON.');
+        assert(json.containsKey(r'owner'), 'Required key "AlbumResponseDto[owner]" is missing from JSON.');
+        assert(json[r'owner'] != null, 'Required key "AlbumResponseDto[owner]" has a null value in JSON.');
+        assert(json.containsKey(r'ownerId'), 'Required key "AlbumResponseDto[ownerId]" is missing from JSON.');
+        assert(json[r'ownerId'] != null, 'Required key "AlbumResponseDto[ownerId]" has a null value in JSON.');
+        assert(json.containsKey(r'shared'), 'Required key "AlbumResponseDto[shared]" is missing from JSON.');
+        assert(json[r'shared'] != null, 'Required key "AlbumResponseDto[shared]" has a null value in JSON.');
+        assert(json.containsKey(r'updatedAt'), 'Required key "AlbumResponseDto[updatedAt]" is missing from JSON.');
+        assert(json[r'updatedAt'] != null, 'Required key "AlbumResponseDto[updatedAt]" has a null value in JSON.');
+        return true;
+      }());
 
       return AlbumResponseDto(
         albumName: mapValueOfType<String>(json, r'albumName')!,

@@ -84,7 +84,7 @@ class TagResponseDto {
     if (this.color != null) {
       json[r'color'] = this.color;
     } else {
-    //  json[r'color'] = null;
+      json[r'color'] = null;
     }
       json[r'createdAt'] = this.createdAt.toUtc().toIso8601String();
       json[r'id'] = this.id;
@@ -92,7 +92,7 @@ class TagResponseDto {
     if (this.parentId != null) {
       json[r'parentId'] = this.parentId;
     } else {
-    //  json[r'parentId'] = null;
+      json[r'parentId'] = null;
     }
       json[r'updatedAt'] = this.updatedAt.toUtc().toIso8601String();
       json[r'value'] = this.value;
@@ -103,9 +103,25 @@ class TagResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static TagResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "TagResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'createdAt'), 'Required key "TagResponseDto[createdAt]" is missing from JSON.');
+        assert(json[r'createdAt'] != null, 'Required key "TagResponseDto[createdAt]" has a null value in JSON.');
+        assert(json.containsKey(r'id'), 'Required key "TagResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "TagResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'name'), 'Required key "TagResponseDto[name]" is missing from JSON.');
+        assert(json[r'name'] != null, 'Required key "TagResponseDto[name]" has a null value in JSON.');
+        assert(json.containsKey(r'updatedAt'), 'Required key "TagResponseDto[updatedAt]" is missing from JSON.');
+        assert(json[r'updatedAt'] != null, 'Required key "TagResponseDto[updatedAt]" has a null value in JSON.');
+        assert(json.containsKey(r'value'), 'Required key "TagResponseDto[value]" is missing from JSON.');
+        assert(json[r'value'] != null, 'Required key "TagResponseDto[value]" has a null value in JSON.');
+        return true;
+      }());
 
       return TagResponseDto(
         color: mapValueOfType<String>(json, r'color'),

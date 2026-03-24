@@ -91,23 +91,23 @@ class WorkflowUpdateDto {
     if (this.description != null) {
       json[r'description'] = this.description;
     } else {
-    //  json[r'description'] = null;
+      json[r'description'] = null;
     }
     if (this.enabled != null) {
       json[r'enabled'] = this.enabled;
     } else {
-    //  json[r'enabled'] = null;
+      json[r'enabled'] = null;
     }
       json[r'filters'] = this.filters;
     if (this.name != null) {
       json[r'name'] = this.name;
     } else {
-    //  json[r'name'] = null;
+      json[r'name'] = null;
     }
     if (this.triggerType != null) {
       json[r'triggerType'] = this.triggerType;
     } else {
-    //  json[r'triggerType'] = null;
+      json[r'triggerType'] = null;
     }
     return json;
   }
@@ -116,9 +116,15 @@ class WorkflowUpdateDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static WorkflowUpdateDto? fromJson(dynamic value) {
-    upgradeDto(value, "WorkflowUpdateDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return WorkflowUpdateDto(
         actions: WorkflowActionItemDto.listFromJson(json[r'actions']),

@@ -68,17 +68,17 @@ class SessionCreateDto {
     if (this.deviceOS != null) {
       json[r'deviceOS'] = this.deviceOS;
     } else {
-    //  json[r'deviceOS'] = null;
+      json[r'deviceOS'] = null;
     }
     if (this.deviceType != null) {
       json[r'deviceType'] = this.deviceType;
     } else {
-    //  json[r'deviceType'] = null;
+      json[r'deviceType'] = null;
     }
     if (this.duration != null) {
       json[r'duration'] = this.duration;
     } else {
-    //  json[r'duration'] = null;
+      json[r'duration'] = null;
     }
     return json;
   }
@@ -87,9 +87,15 @@ class SessionCreateDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static SessionCreateDto? fromJson(dynamic value) {
-    upgradeDto(value, "SessionCreateDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return SessionCreateDto(
         deviceOS: mapValueOfType<String>(json, r'deviceOS'),

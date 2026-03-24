@@ -90,18 +90,18 @@ class SyncPersonV1 {
     if (this.birthDate != null) {
       json[r'birthDate'] = this.birthDate!.toUtc().toIso8601String();
     } else {
-    //  json[r'birthDate'] = null;
+      json[r'birthDate'] = null;
     }
     if (this.color != null) {
       json[r'color'] = this.color;
     } else {
-    //  json[r'color'] = null;
+      json[r'color'] = null;
     }
       json[r'createdAt'] = this.createdAt.toUtc().toIso8601String();
     if (this.faceAssetId != null) {
       json[r'faceAssetId'] = this.faceAssetId;
     } else {
-    //  json[r'faceAssetId'] = null;
+      json[r'faceAssetId'] = null;
     }
       json[r'id'] = this.id;
       json[r'isFavorite'] = this.isFavorite;
@@ -116,9 +116,32 @@ class SyncPersonV1 {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static SyncPersonV1? fromJson(dynamic value) {
-    upgradeDto(value, "SyncPersonV1");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'birthDate'), 'Required key "SyncPersonV1[birthDate]" is missing from JSON.');
+        assert(json.containsKey(r'color'), 'Required key "SyncPersonV1[color]" is missing from JSON.');
+        assert(json.containsKey(r'createdAt'), 'Required key "SyncPersonV1[createdAt]" is missing from JSON.');
+        assert(json[r'createdAt'] != null, 'Required key "SyncPersonV1[createdAt]" has a null value in JSON.');
+        assert(json.containsKey(r'faceAssetId'), 'Required key "SyncPersonV1[faceAssetId]" is missing from JSON.');
+        assert(json.containsKey(r'id'), 'Required key "SyncPersonV1[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "SyncPersonV1[id]" has a null value in JSON.');
+        assert(json.containsKey(r'isFavorite'), 'Required key "SyncPersonV1[isFavorite]" is missing from JSON.');
+        assert(json[r'isFavorite'] != null, 'Required key "SyncPersonV1[isFavorite]" has a null value in JSON.');
+        assert(json.containsKey(r'isHidden'), 'Required key "SyncPersonV1[isHidden]" is missing from JSON.');
+        assert(json[r'isHidden'] != null, 'Required key "SyncPersonV1[isHidden]" has a null value in JSON.');
+        assert(json.containsKey(r'name'), 'Required key "SyncPersonV1[name]" is missing from JSON.');
+        assert(json[r'name'] != null, 'Required key "SyncPersonV1[name]" has a null value in JSON.');
+        assert(json.containsKey(r'ownerId'), 'Required key "SyncPersonV1[ownerId]" is missing from JSON.');
+        assert(json[r'ownerId'] != null, 'Required key "SyncPersonV1[ownerId]" has a null value in JSON.');
+        assert(json.containsKey(r'updatedAt'), 'Required key "SyncPersonV1[updatedAt]" is missing from JSON.');
+        assert(json[r'updatedAt'] != null, 'Required key "SyncPersonV1[updatedAt]" has a null value in JSON.');
+        return true;
+      }());
 
       return SyncPersonV1(
         birthDate: mapDateTime(json, r'birthDate', r''),

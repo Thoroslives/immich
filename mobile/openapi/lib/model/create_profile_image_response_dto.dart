@@ -55,9 +55,21 @@ class CreateProfileImageResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static CreateProfileImageResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "CreateProfileImageResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'profileChangedAt'), 'Required key "CreateProfileImageResponseDto[profileChangedAt]" is missing from JSON.');
+        assert(json[r'profileChangedAt'] != null, 'Required key "CreateProfileImageResponseDto[profileChangedAt]" has a null value in JSON.');
+        assert(json.containsKey(r'profileImagePath'), 'Required key "CreateProfileImageResponseDto[profileImagePath]" is missing from JSON.');
+        assert(json[r'profileImagePath'] != null, 'Required key "CreateProfileImageResponseDto[profileImagePath]" has a null value in JSON.');
+        assert(json.containsKey(r'userId'), 'Required key "CreateProfileImageResponseDto[userId]" is missing from JSON.');
+        assert(json[r'userId'] != null, 'Required key "CreateProfileImageResponseDto[userId]" has a null value in JSON.');
+        return true;
+      }());
 
       return CreateProfileImageResponseDto(
         profileChangedAt: mapDateTime(json, r'profileChangedAt', r'')!,

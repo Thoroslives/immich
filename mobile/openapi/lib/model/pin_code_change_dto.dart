@@ -61,12 +61,12 @@ class PinCodeChangeDto {
     if (this.password != null) {
       json[r'password'] = this.password;
     } else {
-    //  json[r'password'] = null;
+      json[r'password'] = null;
     }
     if (this.pinCode != null) {
       json[r'pinCode'] = this.pinCode;
     } else {
-    //  json[r'pinCode'] = null;
+      json[r'pinCode'] = null;
     }
     return json;
   }
@@ -75,9 +75,17 @@ class PinCodeChangeDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static PinCodeChangeDto? fromJson(dynamic value) {
-    upgradeDto(value, "PinCodeChangeDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'newPinCode'), 'Required key "PinCodeChangeDto[newPinCode]" is missing from JSON.');
+        assert(json[r'newPinCode'] != null, 'Required key "PinCodeChangeDto[newPinCode]" has a null value in JSON.');
+        return true;
+      }());
 
       return PinCodeChangeDto(
         newPinCode: mapValueOfType<String>(json, r'newPinCode')!,

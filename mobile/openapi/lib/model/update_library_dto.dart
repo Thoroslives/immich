@@ -56,7 +56,7 @@ class UpdateLibraryDto {
     if (this.name != null) {
       json[r'name'] = this.name;
     } else {
-    //  json[r'name'] = null;
+      json[r'name'] = null;
     }
     return json;
   }
@@ -65,9 +65,15 @@ class UpdateLibraryDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static UpdateLibraryDto? fromJson(dynamic value) {
-    upgradeDto(value, "UpdateLibraryDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return UpdateLibraryDto(
         exclusionPatterns: json[r'exclusionPatterns'] is Iterable

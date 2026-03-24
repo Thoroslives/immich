@@ -110,40 +110,40 @@ class UserAdminCreateDto {
     if (this.avatarColor != null) {
       json[r'avatarColor'] = this.avatarColor;
     } else {
-    //  json[r'avatarColor'] = null;
+      json[r'avatarColor'] = null;
     }
       json[r'email'] = this.email;
     if (this.isAdmin != null) {
       json[r'isAdmin'] = this.isAdmin;
     } else {
-    //  json[r'isAdmin'] = null;
+      json[r'isAdmin'] = null;
     }
       json[r'name'] = this.name;
     if (this.notify != null) {
       json[r'notify'] = this.notify;
     } else {
-    //  json[r'notify'] = null;
+      json[r'notify'] = null;
     }
       json[r'password'] = this.password;
     if (this.pinCode != null) {
       json[r'pinCode'] = this.pinCode;
     } else {
-    //  json[r'pinCode'] = null;
+      json[r'pinCode'] = null;
     }
     if (this.quotaSizeInBytes != null) {
       json[r'quotaSizeInBytes'] = this.quotaSizeInBytes;
     } else {
-    //  json[r'quotaSizeInBytes'] = null;
+      json[r'quotaSizeInBytes'] = null;
     }
     if (this.shouldChangePassword != null) {
       json[r'shouldChangePassword'] = this.shouldChangePassword;
     } else {
-    //  json[r'shouldChangePassword'] = null;
+      json[r'shouldChangePassword'] = null;
     }
     if (this.storageLabel != null) {
       json[r'storageLabel'] = this.storageLabel;
     } else {
-    //  json[r'storageLabel'] = null;
+      json[r'storageLabel'] = null;
     }
     return json;
   }
@@ -152,9 +152,21 @@ class UserAdminCreateDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static UserAdminCreateDto? fromJson(dynamic value) {
-    upgradeDto(value, "UserAdminCreateDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'email'), 'Required key "UserAdminCreateDto[email]" is missing from JSON.');
+        assert(json[r'email'] != null, 'Required key "UserAdminCreateDto[email]" has a null value in JSON.');
+        assert(json.containsKey(r'name'), 'Required key "UserAdminCreateDto[name]" is missing from JSON.');
+        assert(json[r'name'] != null, 'Required key "UserAdminCreateDto[name]" has a null value in JSON.');
+        assert(json.containsKey(r'password'), 'Required key "UserAdminCreateDto[password]" is missing from JSON.');
+        assert(json[r'password'] != null, 'Required key "UserAdminCreateDto[password]" has a null value in JSON.');
+        return true;
+      }());
 
       return UserAdminCreateDto(
         avatarColor: UserAvatarColor.fromJson(json[r'avatarColor']),

@@ -63,7 +63,7 @@ class CreateAlbumDto {
     if (this.description != null) {
       json[r'description'] = this.description;
     } else {
-    //  json[r'description'] = null;
+      json[r'description'] = null;
     }
     return json;
   }
@@ -72,9 +72,17 @@ class CreateAlbumDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static CreateAlbumDto? fromJson(dynamic value) {
-    upgradeDto(value, "CreateAlbumDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'albumName'), 'Required key "CreateAlbumDto[albumName]" is missing from JSON.');
+        assert(json[r'albumName'] != null, 'Required key "CreateAlbumDto[albumName]" has a null value in JSON.');
+        return true;
+      }());
 
       return CreateAlbumDto(
         albumName: mapValueOfType<String>(json, r'albumName')!,

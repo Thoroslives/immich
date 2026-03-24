@@ -90,7 +90,7 @@ class WorkflowResponseDto {
     if (this.name != null) {
       json[r'name'] = this.name;
     } else {
-    //  json[r'name'] = null;
+      json[r'name'] = null;
     }
       json[r'ownerId'] = this.ownerId;
       json[r'triggerType'] = this.triggerType;
@@ -101,9 +101,32 @@ class WorkflowResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static WorkflowResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "WorkflowResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'actions'), 'Required key "WorkflowResponseDto[actions]" is missing from JSON.');
+        assert(json[r'actions'] != null, 'Required key "WorkflowResponseDto[actions]" has a null value in JSON.');
+        assert(json.containsKey(r'createdAt'), 'Required key "WorkflowResponseDto[createdAt]" is missing from JSON.');
+        assert(json[r'createdAt'] != null, 'Required key "WorkflowResponseDto[createdAt]" has a null value in JSON.');
+        assert(json.containsKey(r'description'), 'Required key "WorkflowResponseDto[description]" is missing from JSON.');
+        assert(json[r'description'] != null, 'Required key "WorkflowResponseDto[description]" has a null value in JSON.');
+        assert(json.containsKey(r'enabled'), 'Required key "WorkflowResponseDto[enabled]" is missing from JSON.');
+        assert(json[r'enabled'] != null, 'Required key "WorkflowResponseDto[enabled]" has a null value in JSON.');
+        assert(json.containsKey(r'filters'), 'Required key "WorkflowResponseDto[filters]" is missing from JSON.');
+        assert(json[r'filters'] != null, 'Required key "WorkflowResponseDto[filters]" has a null value in JSON.');
+        assert(json.containsKey(r'id'), 'Required key "WorkflowResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "WorkflowResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'name'), 'Required key "WorkflowResponseDto[name]" is missing from JSON.');
+        assert(json.containsKey(r'ownerId'), 'Required key "WorkflowResponseDto[ownerId]" is missing from JSON.');
+        assert(json[r'ownerId'] != null, 'Required key "WorkflowResponseDto[ownerId]" has a null value in JSON.');
+        assert(json.containsKey(r'triggerType'), 'Required key "WorkflowResponseDto[triggerType]" is missing from JSON.');
+        assert(json[r'triggerType'] != null, 'Required key "WorkflowResponseDto[triggerType]" has a null value in JSON.');
+        return true;
+      }());
 
       return WorkflowResponseDto(
         actions: WorkflowActionResponseDto.listFromJson(json[r'actions']),

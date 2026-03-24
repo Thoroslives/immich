@@ -60,12 +60,12 @@ class OAuthCallbackDto {
     if (this.codeVerifier != null) {
       json[r'codeVerifier'] = this.codeVerifier;
     } else {
-    //  json[r'codeVerifier'] = null;
+      json[r'codeVerifier'] = null;
     }
     if (this.state != null) {
       json[r'state'] = this.state;
     } else {
-    //  json[r'state'] = null;
+      json[r'state'] = null;
     }
       json[r'url'] = this.url;
     return json;
@@ -75,9 +75,17 @@ class OAuthCallbackDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static OAuthCallbackDto? fromJson(dynamic value) {
-    upgradeDto(value, "OAuthCallbackDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'url'), 'Required key "OAuthCallbackDto[url]" is missing from JSON.');
+        assert(json[r'url'] != null, 'Required key "OAuthCallbackDto[url]" has a null value in JSON.');
+        return true;
+      }());
 
       return OAuthCallbackDto(
         codeVerifier: mapValueOfType<String>(json, r'codeVerifier'),

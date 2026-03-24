@@ -98,14 +98,14 @@ class SharedLinkService {
       final responseDto = await _apiService.sharedLinksApi.updateSharedLink(
         id,
         SharedLinkEditDto(
-          showMetadata: showMeta,
-          allowDownload: allowDownload,
-          allowUpload: allowUpload,
-          expiresAt: expiresAt,
-          description: description,
-          password: password,
-          slug: slug,
-          changeExpiryTime: changeExpiry,
+          showMetadata: showMeta == null ? const Optional.absent() : Optional.present(showMeta),
+          allowDownload: allowDownload == null ? const Optional.absent() : Optional.present(allowDownload),
+          allowUpload: allowUpload == null ? const Optional.absent() : Optional.present(allowUpload),
+          expiresAt: expiresAt == null ? const Optional.absent() : Optional.present(expiresAt),
+          description: description == null ? const Optional.absent() : Optional.present(description),
+          password: password == null ? const Optional.absent() : Optional.present(password),
+          slug: slug == null ? const Optional.absent() : Optional.present(slug),
+          changeExpiryTime: changeExpiry == null ? const Optional.absent() : Optional.present(changeExpiry),
         ),
       );
       if (responseDto != null) {

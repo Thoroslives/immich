@@ -48,7 +48,7 @@ class SyncStreamDto {
     if (this.reset != null) {
       json[r'reset'] = this.reset;
     } else {
-    //  json[r'reset'] = null;
+      json[r'reset'] = null;
     }
       json[r'types'] = this.types;
     return json;
@@ -58,9 +58,17 @@ class SyncStreamDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static SyncStreamDto? fromJson(dynamic value) {
-    upgradeDto(value, "SyncStreamDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'types'), 'Required key "SyncStreamDto[types]" is missing from JSON.');
+        assert(json[r'types'] != null, 'Required key "SyncStreamDto[types]" has a null value in JSON.');
+        return true;
+      }());
 
       return SyncStreamDto(
         reset: mapValueOfType<bool>(json, r'reset'),

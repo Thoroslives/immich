@@ -181,122 +181,122 @@ class SyncAssetExifV1 {
     if (this.city != null) {
       json[r'city'] = this.city;
     } else {
-    //  json[r'city'] = null;
+      json[r'city'] = null;
     }
     if (this.country != null) {
       json[r'country'] = this.country;
     } else {
-    //  json[r'country'] = null;
+      json[r'country'] = null;
     }
     if (this.dateTimeOriginal != null) {
       json[r'dateTimeOriginal'] = this.dateTimeOriginal!.toUtc().toIso8601String();
     } else {
-    //  json[r'dateTimeOriginal'] = null;
+      json[r'dateTimeOriginal'] = null;
     }
     if (this.description != null) {
       json[r'description'] = this.description;
     } else {
-    //  json[r'description'] = null;
+      json[r'description'] = null;
     }
     if (this.exifImageHeight != null) {
       json[r'exifImageHeight'] = this.exifImageHeight;
     } else {
-    //  json[r'exifImageHeight'] = null;
+      json[r'exifImageHeight'] = null;
     }
     if (this.exifImageWidth != null) {
       json[r'exifImageWidth'] = this.exifImageWidth;
     } else {
-    //  json[r'exifImageWidth'] = null;
+      json[r'exifImageWidth'] = null;
     }
     if (this.exposureTime != null) {
       json[r'exposureTime'] = this.exposureTime;
     } else {
-    //  json[r'exposureTime'] = null;
+      json[r'exposureTime'] = null;
     }
     if (this.fNumber != null) {
       json[r'fNumber'] = this.fNumber;
     } else {
-    //  json[r'fNumber'] = null;
+      json[r'fNumber'] = null;
     }
     if (this.fileSizeInByte != null) {
       json[r'fileSizeInByte'] = this.fileSizeInByte;
     } else {
-    //  json[r'fileSizeInByte'] = null;
+      json[r'fileSizeInByte'] = null;
     }
     if (this.focalLength != null) {
       json[r'focalLength'] = this.focalLength;
     } else {
-    //  json[r'focalLength'] = null;
+      json[r'focalLength'] = null;
     }
     if (this.fps != null) {
       json[r'fps'] = this.fps;
     } else {
-    //  json[r'fps'] = null;
+      json[r'fps'] = null;
     }
     if (this.iso != null) {
       json[r'iso'] = this.iso;
     } else {
-    //  json[r'iso'] = null;
+      json[r'iso'] = null;
     }
     if (this.latitude != null) {
       json[r'latitude'] = this.latitude;
     } else {
-    //  json[r'latitude'] = null;
+      json[r'latitude'] = null;
     }
     if (this.lensModel != null) {
       json[r'lensModel'] = this.lensModel;
     } else {
-    //  json[r'lensModel'] = null;
+      json[r'lensModel'] = null;
     }
     if (this.longitude != null) {
       json[r'longitude'] = this.longitude;
     } else {
-    //  json[r'longitude'] = null;
+      json[r'longitude'] = null;
     }
     if (this.make != null) {
       json[r'make'] = this.make;
     } else {
-    //  json[r'make'] = null;
+      json[r'make'] = null;
     }
     if (this.model != null) {
       json[r'model'] = this.model;
     } else {
-    //  json[r'model'] = null;
+      json[r'model'] = null;
     }
     if (this.modifyDate != null) {
       json[r'modifyDate'] = this.modifyDate!.toUtc().toIso8601String();
     } else {
-    //  json[r'modifyDate'] = null;
+      json[r'modifyDate'] = null;
     }
     if (this.orientation != null) {
       json[r'orientation'] = this.orientation;
     } else {
-    //  json[r'orientation'] = null;
+      json[r'orientation'] = null;
     }
     if (this.profileDescription != null) {
       json[r'profileDescription'] = this.profileDescription;
     } else {
-    //  json[r'profileDescription'] = null;
+      json[r'profileDescription'] = null;
     }
     if (this.projectionType != null) {
       json[r'projectionType'] = this.projectionType;
     } else {
-    //  json[r'projectionType'] = null;
+      json[r'projectionType'] = null;
     }
     if (this.rating != null) {
       json[r'rating'] = this.rating;
     } else {
-    //  json[r'rating'] = null;
+      json[r'rating'] = null;
     }
     if (this.state != null) {
       json[r'state'] = this.state;
     } else {
-    //  json[r'state'] = null;
+      json[r'state'] = null;
     }
     if (this.timeZone != null) {
       json[r'timeZone'] = this.timeZone;
     } else {
-    //  json[r'timeZone'] = null;
+      json[r'timeZone'] = null;
     }
     return json;
   }
@@ -305,9 +305,41 @@ class SyncAssetExifV1 {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static SyncAssetExifV1? fromJson(dynamic value) {
-    upgradeDto(value, "SyncAssetExifV1");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'assetId'), 'Required key "SyncAssetExifV1[assetId]" is missing from JSON.');
+        assert(json[r'assetId'] != null, 'Required key "SyncAssetExifV1[assetId]" has a null value in JSON.');
+        assert(json.containsKey(r'city'), 'Required key "SyncAssetExifV1[city]" is missing from JSON.');
+        assert(json.containsKey(r'country'), 'Required key "SyncAssetExifV1[country]" is missing from JSON.');
+        assert(json.containsKey(r'dateTimeOriginal'), 'Required key "SyncAssetExifV1[dateTimeOriginal]" is missing from JSON.');
+        assert(json.containsKey(r'description'), 'Required key "SyncAssetExifV1[description]" is missing from JSON.');
+        assert(json.containsKey(r'exifImageHeight'), 'Required key "SyncAssetExifV1[exifImageHeight]" is missing from JSON.');
+        assert(json.containsKey(r'exifImageWidth'), 'Required key "SyncAssetExifV1[exifImageWidth]" is missing from JSON.');
+        assert(json.containsKey(r'exposureTime'), 'Required key "SyncAssetExifV1[exposureTime]" is missing from JSON.');
+        assert(json.containsKey(r'fNumber'), 'Required key "SyncAssetExifV1[fNumber]" is missing from JSON.');
+        assert(json.containsKey(r'fileSizeInByte'), 'Required key "SyncAssetExifV1[fileSizeInByte]" is missing from JSON.');
+        assert(json.containsKey(r'focalLength'), 'Required key "SyncAssetExifV1[focalLength]" is missing from JSON.');
+        assert(json.containsKey(r'fps'), 'Required key "SyncAssetExifV1[fps]" is missing from JSON.');
+        assert(json.containsKey(r'iso'), 'Required key "SyncAssetExifV1[iso]" is missing from JSON.');
+        assert(json.containsKey(r'latitude'), 'Required key "SyncAssetExifV1[latitude]" is missing from JSON.');
+        assert(json.containsKey(r'lensModel'), 'Required key "SyncAssetExifV1[lensModel]" is missing from JSON.');
+        assert(json.containsKey(r'longitude'), 'Required key "SyncAssetExifV1[longitude]" is missing from JSON.');
+        assert(json.containsKey(r'make'), 'Required key "SyncAssetExifV1[make]" is missing from JSON.');
+        assert(json.containsKey(r'model'), 'Required key "SyncAssetExifV1[model]" is missing from JSON.');
+        assert(json.containsKey(r'modifyDate'), 'Required key "SyncAssetExifV1[modifyDate]" is missing from JSON.');
+        assert(json.containsKey(r'orientation'), 'Required key "SyncAssetExifV1[orientation]" is missing from JSON.');
+        assert(json.containsKey(r'profileDescription'), 'Required key "SyncAssetExifV1[profileDescription]" is missing from JSON.');
+        assert(json.containsKey(r'projectionType'), 'Required key "SyncAssetExifV1[projectionType]" is missing from JSON.');
+        assert(json.containsKey(r'rating'), 'Required key "SyncAssetExifV1[rating]" is missing from JSON.');
+        assert(json.containsKey(r'state'), 'Required key "SyncAssetExifV1[state]" is missing from JSON.');
+        assert(json.containsKey(r'timeZone'), 'Required key "SyncAssetExifV1[timeZone]" is missing from JSON.');
+        return true;
+      }());
 
       return SyncAssetExifV1(
         assetId: mapValueOfType<String>(json, r'assetId')!,
@@ -318,14 +350,14 @@ class SyncAssetExifV1 {
         exifImageHeight: mapValueOfType<int>(json, r'exifImageHeight'),
         exifImageWidth: mapValueOfType<int>(json, r'exifImageWidth'),
         exposureTime: mapValueOfType<String>(json, r'exposureTime'),
-        fNumber: (mapValueOfType<num>(json, r'fNumber'))?.toDouble(),
+        fNumber: mapValueOfType<double>(json, r'fNumber'),
         fileSizeInByte: mapValueOfType<int>(json, r'fileSizeInByte'),
-        focalLength: (mapValueOfType<num>(json, r'focalLength'))?.toDouble(),
-        fps: (mapValueOfType<num>(json, r'fps'))?.toDouble(),
+        focalLength: mapValueOfType<double>(json, r'focalLength'),
+        fps: mapValueOfType<double>(json, r'fps'),
         iso: mapValueOfType<int>(json, r'iso'),
-        latitude: (mapValueOfType<num>(json, r'latitude'))?.toDouble(),
+        latitude: mapValueOfType<double>(json, r'latitude'),
         lensModel: mapValueOfType<String>(json, r'lensModel'),
-        longitude: (mapValueOfType<num>(json, r'longitude'))?.toDouble(),
+        longitude: mapValueOfType<double>(json, r'longitude'),
         make: mapValueOfType<String>(json, r'make'),
         model: mapValueOfType<String>(json, r'model'),
         modifyDate: mapDateTime(json, r'modifyDate', r''),

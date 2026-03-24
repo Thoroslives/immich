@@ -54,12 +54,12 @@ class PurchaseUpdate {
     if (this.hideBuyButtonUntil != null) {
       json[r'hideBuyButtonUntil'] = this.hideBuyButtonUntil;
     } else {
-    //  json[r'hideBuyButtonUntil'] = null;
+      json[r'hideBuyButtonUntil'] = null;
     }
     if (this.showSupportBadge != null) {
       json[r'showSupportBadge'] = this.showSupportBadge;
     } else {
-    //  json[r'showSupportBadge'] = null;
+      json[r'showSupportBadge'] = null;
     }
     return json;
   }
@@ -68,9 +68,15 @@ class PurchaseUpdate {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static PurchaseUpdate? fromJson(dynamic value) {
-    upgradeDto(value, "PurchaseUpdate");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return PurchaseUpdate(
         hideBuyButtonUntil: mapValueOfType<String>(json, r'hideBuyButtonUntil'),

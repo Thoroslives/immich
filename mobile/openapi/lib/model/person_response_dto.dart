@@ -96,18 +96,18 @@ class PersonResponseDto {
     if (this.birthDate != null) {
       json[r'birthDate'] = _dateFormatter.format(this.birthDate!.toUtc());
     } else {
-    //  json[r'birthDate'] = null;
+      json[r'birthDate'] = null;
     }
     if (this.color != null) {
       json[r'color'] = this.color;
     } else {
-    //  json[r'color'] = null;
+      json[r'color'] = null;
     }
       json[r'id'] = this.id;
     if (this.isFavorite != null) {
       json[r'isFavorite'] = this.isFavorite;
     } else {
-    //  json[r'isFavorite'] = null;
+      json[r'isFavorite'] = null;
     }
       json[r'isHidden'] = this.isHidden;
       json[r'name'] = this.name;
@@ -115,7 +115,7 @@ class PersonResponseDto {
     if (this.updatedAt != null) {
       json[r'updatedAt'] = this.updatedAt!.toUtc().toIso8601String();
     } else {
-    //  json[r'updatedAt'] = null;
+      json[r'updatedAt'] = null;
     }
     return json;
   }
@@ -124,9 +124,24 @@ class PersonResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static PersonResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "PersonResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'birthDate'), 'Required key "PersonResponseDto[birthDate]" is missing from JSON.');
+        assert(json.containsKey(r'id'), 'Required key "PersonResponseDto[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "PersonResponseDto[id]" has a null value in JSON.');
+        assert(json.containsKey(r'isHidden'), 'Required key "PersonResponseDto[isHidden]" is missing from JSON.');
+        assert(json[r'isHidden'] != null, 'Required key "PersonResponseDto[isHidden]" has a null value in JSON.');
+        assert(json.containsKey(r'name'), 'Required key "PersonResponseDto[name]" is missing from JSON.');
+        assert(json[r'name'] != null, 'Required key "PersonResponseDto[name]" has a null value in JSON.');
+        assert(json.containsKey(r'thumbnailPath'), 'Required key "PersonResponseDto[thumbnailPath]" is missing from JSON.');
+        assert(json[r'thumbnailPath'] != null, 'Required key "PersonResponseDto[thumbnailPath]" has a null value in JSON.');
+        return true;
+      }());
 
       return PersonResponseDto(
         birthDate: mapDateTime(json, r'birthDate', r''),

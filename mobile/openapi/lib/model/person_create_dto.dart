@@ -78,27 +78,27 @@ class PersonCreateDto {
     if (this.birthDate != null) {
       json[r'birthDate'] = _dateFormatter.format(this.birthDate!.toUtc());
     } else {
-    //  json[r'birthDate'] = null;
+      json[r'birthDate'] = null;
     }
     if (this.color != null) {
       json[r'color'] = this.color;
     } else {
-    //  json[r'color'] = null;
+      json[r'color'] = null;
     }
     if (this.isFavorite != null) {
       json[r'isFavorite'] = this.isFavorite;
     } else {
-    //  json[r'isFavorite'] = null;
+      json[r'isFavorite'] = null;
     }
     if (this.isHidden != null) {
       json[r'isHidden'] = this.isHidden;
     } else {
-    //  json[r'isHidden'] = null;
+      json[r'isHidden'] = null;
     }
     if (this.name != null) {
       json[r'name'] = this.name;
     } else {
-    //  json[r'name'] = null;
+      json[r'name'] = null;
     }
     return json;
   }
@@ -107,9 +107,15 @@ class PersonCreateDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static PersonCreateDto? fromJson(dynamic value) {
-    upgradeDto(value, "PersonCreateDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return PersonCreateDto(
         birthDate: mapDateTime(json, r'birthDate', r''),

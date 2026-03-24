@@ -66,9 +66,21 @@ class SystemConfigGeneratedImageDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static SystemConfigGeneratedImageDto? fromJson(dynamic value) {
-    upgradeDto(value, "SystemConfigGeneratedImageDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'format'), 'Required key "SystemConfigGeneratedImageDto[format]" is missing from JSON.');
+        assert(json[r'format'] != null, 'Required key "SystemConfigGeneratedImageDto[format]" has a null value in JSON.');
+        assert(json.containsKey(r'quality'), 'Required key "SystemConfigGeneratedImageDto[quality]" is missing from JSON.');
+        assert(json[r'quality'] != null, 'Required key "SystemConfigGeneratedImageDto[quality]" has a null value in JSON.');
+        assert(json.containsKey(r'size'), 'Required key "SystemConfigGeneratedImageDto[size]" is missing from JSON.');
+        assert(json[r'size'] != null, 'Required key "SystemConfigGeneratedImageDto[size]" has a null value in JSON.');
+        return true;
+      }());
 
       return SystemConfigGeneratedImageDto(
         format: ImageFormat.fromJson(json[r'format'])!,

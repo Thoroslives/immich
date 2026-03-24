@@ -72,11 +72,13 @@ class AlbumApiRepository extends ApiRepository {
       _api.updateAlbumInfo(
         albumId,
         UpdateAlbumDto(
-          albumName: name,
-          albumThumbnailAssetId: thumbnailAssetId,
-          description: description,
-          isActivityEnabled: activityEnabled,
-          order: order,
+          albumName: name == null ? const Optional.absent() : Optional.present(name),
+          albumThumbnailAssetId: thumbnailAssetId == null
+              ? const Optional.absent()
+              : Optional.present(thumbnailAssetId),
+          description: description == null ? const Optional.absent() : Optional.present(description),
+          isActivityEnabled: activityEnabled == null ? const Optional.absent() : Optional.present(activityEnabled),
+          order: order == null ? const Optional.absent() : Optional.present(order),
         ),
       ),
     );

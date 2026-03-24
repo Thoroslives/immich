@@ -162,112 +162,112 @@ class ExifResponseDto {
     if (this.city != null) {
       json[r'city'] = this.city;
     } else {
-    //  json[r'city'] = null;
+      json[r'city'] = null;
     }
     if (this.country != null) {
       json[r'country'] = this.country;
     } else {
-    //  json[r'country'] = null;
+      json[r'country'] = null;
     }
     if (this.dateTimeOriginal != null) {
       json[r'dateTimeOriginal'] = this.dateTimeOriginal!.toUtc().toIso8601String();
     } else {
-    //  json[r'dateTimeOriginal'] = null;
+      json[r'dateTimeOriginal'] = null;
     }
     if (this.description != null) {
       json[r'description'] = this.description;
     } else {
-    //  json[r'description'] = null;
+      json[r'description'] = null;
     }
     if (this.exifImageHeight != null) {
       json[r'exifImageHeight'] = this.exifImageHeight;
     } else {
-    //  json[r'exifImageHeight'] = null;
+      json[r'exifImageHeight'] = null;
     }
     if (this.exifImageWidth != null) {
       json[r'exifImageWidth'] = this.exifImageWidth;
     } else {
-    //  json[r'exifImageWidth'] = null;
+      json[r'exifImageWidth'] = null;
     }
     if (this.exposureTime != null) {
       json[r'exposureTime'] = this.exposureTime;
     } else {
-    //  json[r'exposureTime'] = null;
+      json[r'exposureTime'] = null;
     }
     if (this.fNumber != null) {
       json[r'fNumber'] = this.fNumber;
     } else {
-    //  json[r'fNumber'] = null;
+      json[r'fNumber'] = null;
     }
     if (this.fileSizeInByte != null) {
       json[r'fileSizeInByte'] = this.fileSizeInByte;
     } else {
-    //  json[r'fileSizeInByte'] = null;
+      json[r'fileSizeInByte'] = null;
     }
     if (this.focalLength != null) {
       json[r'focalLength'] = this.focalLength;
     } else {
-    //  json[r'focalLength'] = null;
+      json[r'focalLength'] = null;
     }
     if (this.iso != null) {
       json[r'iso'] = this.iso;
     } else {
-    //  json[r'iso'] = null;
+      json[r'iso'] = null;
     }
     if (this.latitude != null) {
       json[r'latitude'] = this.latitude;
     } else {
-    //  json[r'latitude'] = null;
+      json[r'latitude'] = null;
     }
     if (this.lensModel != null) {
       json[r'lensModel'] = this.lensModel;
     } else {
-    //  json[r'lensModel'] = null;
+      json[r'lensModel'] = null;
     }
     if (this.longitude != null) {
       json[r'longitude'] = this.longitude;
     } else {
-    //  json[r'longitude'] = null;
+      json[r'longitude'] = null;
     }
     if (this.make != null) {
       json[r'make'] = this.make;
     } else {
-    //  json[r'make'] = null;
+      json[r'make'] = null;
     }
     if (this.model != null) {
       json[r'model'] = this.model;
     } else {
-    //  json[r'model'] = null;
+      json[r'model'] = null;
     }
     if (this.modifyDate != null) {
       json[r'modifyDate'] = this.modifyDate!.toUtc().toIso8601String();
     } else {
-    //  json[r'modifyDate'] = null;
+      json[r'modifyDate'] = null;
     }
     if (this.orientation != null) {
       json[r'orientation'] = this.orientation;
     } else {
-    //  json[r'orientation'] = null;
+      json[r'orientation'] = null;
     }
     if (this.projectionType != null) {
       json[r'projectionType'] = this.projectionType;
     } else {
-    //  json[r'projectionType'] = null;
+      json[r'projectionType'] = null;
     }
     if (this.rating != null) {
       json[r'rating'] = this.rating;
     } else {
-    //  json[r'rating'] = null;
+      json[r'rating'] = null;
     }
     if (this.state != null) {
       json[r'state'] = this.state;
     } else {
-    //  json[r'state'] = null;
+      json[r'state'] = null;
     }
     if (this.timeZone != null) {
       json[r'timeZone'] = this.timeZone;
     } else {
-    //  json[r'timeZone'] = null;
+      json[r'timeZone'] = null;
     }
     return json;
   }
@@ -276,9 +276,15 @@ class ExifResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static ExifResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "ExifResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
 
       return ExifResponseDto(
         city: mapValueOfType<String>(json, r'city'),

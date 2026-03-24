@@ -42,12 +42,12 @@ class ReverseGeocodingStateResponseDto {
     if (this.lastImportFileName != null) {
       json[r'lastImportFileName'] = this.lastImportFileName;
     } else {
-    //  json[r'lastImportFileName'] = null;
+      json[r'lastImportFileName'] = null;
     }
     if (this.lastUpdate != null) {
       json[r'lastUpdate'] = this.lastUpdate;
     } else {
-    //  json[r'lastUpdate'] = null;
+      json[r'lastUpdate'] = null;
     }
     return json;
   }
@@ -56,9 +56,17 @@ class ReverseGeocodingStateResponseDto {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static ReverseGeocodingStateResponseDto? fromJson(dynamic value) {
-    upgradeDto(value, "ReverseGeocodingStateResponseDto");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'lastImportFileName'), 'Required key "ReverseGeocodingStateResponseDto[lastImportFileName]" is missing from JSON.');
+        assert(json.containsKey(r'lastUpdate'), 'Required key "ReverseGeocodingStateResponseDto[lastUpdate]" is missing from JSON.');
+        return true;
+      }());
 
       return ReverseGeocodingStateResponseDto(
         lastImportFileName: mapValueOfType<String>(json, r'lastImportFileName'),

@@ -96,33 +96,33 @@ class PeopleUpdateItem {
     if (this.birthDate != null) {
       json[r'birthDate'] = _dateFormatter.format(this.birthDate!.toUtc());
     } else {
-    //  json[r'birthDate'] = null;
+      json[r'birthDate'] = null;
     }
     if (this.color != null) {
       json[r'color'] = this.color;
     } else {
-    //  json[r'color'] = null;
+      json[r'color'] = null;
     }
     if (this.featureFaceAssetId != null) {
       json[r'featureFaceAssetId'] = this.featureFaceAssetId;
     } else {
-    //  json[r'featureFaceAssetId'] = null;
+      json[r'featureFaceAssetId'] = null;
     }
       json[r'id'] = this.id;
     if (this.isFavorite != null) {
       json[r'isFavorite'] = this.isFavorite;
     } else {
-    //  json[r'isFavorite'] = null;
+      json[r'isFavorite'] = null;
     }
     if (this.isHidden != null) {
       json[r'isHidden'] = this.isHidden;
     } else {
-    //  json[r'isHidden'] = null;
+      json[r'isHidden'] = null;
     }
     if (this.name != null) {
       json[r'name'] = this.name;
     } else {
-    //  json[r'name'] = null;
+      json[r'name'] = null;
     }
     return json;
   }
@@ -131,9 +131,17 @@ class PeopleUpdateItem {
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
   static PeopleUpdateItem? fromJson(dynamic value) {
-    upgradeDto(value, "PeopleUpdateItem");
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        assert(json.containsKey(r'id'), 'Required key "PeopleUpdateItem[id]" is missing from JSON.');
+        assert(json[r'id'] != null, 'Required key "PeopleUpdateItem[id]" has a null value in JSON.');
+        return true;
+      }());
 
       return PeopleUpdateItem(
         birthDate: mapDateTime(json, r'birthDate', r''),
