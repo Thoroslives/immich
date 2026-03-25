@@ -39,6 +39,8 @@ export class AssetViewerManager extends BaseEventManager<Events> {
   isShowActivityPanel = $state(false);
   isPlayingMotionPhoto = $state(false);
   isShowEditor = $state(false);
+  isFaceEditMode = $state(false);
+  isEditFacesPanelOpen = $state(false);
 
   get isImageLoading() {
     return this.#isImageLoading;

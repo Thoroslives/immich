@@ -10,7 +10,6 @@
   import { featureFlagsManager } from '$lib/managers/feature-flags-manager.svelte';
   import AssetChangeDateModal from '$lib/modals/AssetChangeDateModal.svelte';
   import { Route } from '$lib/route';
-  import { isFaceEditMode } from '$lib/stores/face-edit.svelte';
   import { boundingBoxesArray } from '$lib/stores/people.store';
   import { locale } from '$lib/stores/preferences.store';
   import { preferences, user } from '$lib/stores/user.store';
@@ -41,6 +40,7 @@
     mdiPlus,
   } from '@mdi/js';
   import { DateTime } from 'luxon';
+  import { onDestroy } from 'svelte';
   import { t } from 'svelte-i18n';
   import { slide } from 'svelte/transition';
   import ImageThumbnail from '../assets/thumbnail/image-thumbnail.svelte';
@@ -57,7 +57,6 @@
   let { asset, currentAlbum = null }: Props = $props();
 
   let showAssetPath = $state(false);
-  let showEditFaces = $state(false);
   let isOwner = $derived($user?.id === asset.ownerId);
   let people = $derived(asset.people || []);
   let unassignedFaces = $derived(asset.unassignedFaces || []);
@@ -106,7 +105,7 @@
       return;
     }
 
-    showEditFaces = false;
+    assetViewerManager.isEditFacesPanelOpen = false;
     previousId = asset.id;
   });
 
@@ -122,7 +121,7 @@
 
   const handleRefreshPeople = async () => {
     asset = await getAssetInfo({ id: asset.id });
-    showEditFaces = false;
+    assetViewerManager.isEditFacesPanelOpen = false;
   };
 
   const getAssetFolderHref = (asset: AssetResponseDto) => {
@@ -143,6 +142,10 @@
       initialTimeZone: timeZone,
     });
   };
+
+  onDestroy(() => {
+    assetViewerManager.isEditFacesPanelOpen = false;
+  });
 </script>
 
 <OnEvents onAlbumAddAssets={() => (albums = refreshAlbums())} />
@@ -208,7 +211,7 @@
             shape="round"
             color="secondary"
             variant="ghost"
-            onclick={() => (isFaceEditMode.value = !isFaceEditMode.value)}
+            onclick={() => (assetViewerManager.isFaceEditMode = !assetViewerManager.isFaceEditMode)}
           />
 
           {#if people.length > 0 || unassignedFaces.length > 0}
@@ -219,22 +222,23 @@
               shape="round"
               color="secondary"
               variant="ghost"
-              onclick={() => (showEditFaces = true)}
+              onclick={() => (assetViewerManager.isEditFacesPanelOpen = true)}
             />
           {/if}
         </div>
       </div>
 
-      <div class="mt-2 flex flex-wrap gap-2">
+      <div class="mt-2 flex flex-wrap gap-4">
         {#each people as person, index (person.id)}
           {#if showingHiddenPeople || !person.isHidden}
+            {@const isHighlighted = people[index].faces.some((f) => $boundingBoxesArray.some((b) => b.id === f.id))}
             <a
-              class="w-22"
+              class="group w-22 outline-none"
               href={Route.viewPerson(person, { previousRoute })}
               onfocus={() => ($boundingBoxesArray = people[index].faces)}
               onblur={() => ($boundingBoxesArray = [])}
-              onmouseover={() => ($boundingBoxesArray = people[index].faces)}
-              onmouseleave={() => ($boundingBoxesArray = [])}
+              onpointerover={() => ($boundingBoxesArray = people[index].faces)}
+              onpointerleave={() => ($boundingBoxesArray = [])}
             >
               <div class="relative">
                 <ImageThumbnail
@@ -246,6 +250,8 @@
                   widthStyle="90px"
                   heightStyle="90px"
                   hidden={person.isHidden}
+                  highlighted={isHighlighted}
+                  class="group-focus-visible:outline-2 group-focus-visible:outline-offset-2 group-focus-visible:outline-immich-primary dark:group-focus-visible:outline-immich-dark-primary"
                 />
               </div>
               <p class="mt-1 truncate font-medium" title={person.name}>{person.name}</p>
@@ -492,7 +498,7 @@
         zoom={12.5}
         simplified
         useLocationPin
-        showSimpleControls={!showEditFaces}
+        showSimpleControls={!assetViewerManager.isEditFacesPanelOpen}
         onOpenInMapView={() => goto(Route.map({ ...latlng, zoom: 12.5 }))}
       >
         {#snippet popup({ marker })}
@@ -570,11 +576,11 @@
   </section>
 {/if}
 
-{#if showEditFaces}
+{#if assetViewerManager.isEditFacesPanelOpen}
   <PersonSidePanel
     assetId={asset.id}
     assetType={asset.type}
-    onClose={() => (showEditFaces = false)}
+    onClose={() => (assetViewerManager.isEditFacesPanelOpen = false)}
     onRefresh={handleRefreshPeople}
   />
 {/if}

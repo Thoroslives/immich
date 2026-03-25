@@ -8,7 +8,6 @@
   import AssetViewerEvents from '$lib/components/AssetViewerEvents.svelte';
   import { assetViewerManager } from '$lib/managers/asset-viewer-manager.svelte';
   import { castManager } from '$lib/managers/cast-manager.svelte';
-  import { isFaceEditMode } from '$lib/stores/face-edit.svelte';
   import { ocrManager } from '$lib/stores/ocr.svelte';
   import { boundingBoxesArray, type Faces } from '$lib/stores/people.store';
   import { SlideshowLook, SlideshowState, slideshowStore } from '$lib/stores/slideshow.store';
@@ -106,7 +105,7 @@
   const onPlaySlideshow = () => ($slideshowState = SlideshowState.PlaySlideshow);
 
   $effect(() => {
-    if (isFaceEditMode.value && assetViewerManager.zoom > 1) {
+    if (assetViewerManager.isFaceEditMode && assetViewerManager.zoom > 1) {
       onZoom();
     }
   });
@@ -153,10 +152,15 @@
 
   const faceToNameMap = $derived.by(() => {
     // eslint-disable-next-line svelte/prefer-svelte-reactivity
-    const map = new Map<Faces, string>();
+    const map = new Map<Faces, string | undefined>();
     for (const person of asset.people ?? []) {
       for (const face of person.faces ?? []) {
         map.set(face, person.name);
+      }
+    }
+    if (assetViewerManager.isEditFacesPanelOpen) {
+      for (const face of asset.unassignedFaces ?? []) {
+        map.set(face, undefined);
       }
     }
     return map;
@@ -166,7 +170,7 @@
 
   const handleImageMouseMove = (event: MouseEvent) => {
     $boundingBoxesArray = [];
-    if (!assetViewerManager.imgRef || !element || isFaceEditMode.value || ocrManager.showOverlay) {
+    if (!assetViewerManager.imgRef || !element || assetViewerManager.isFaceEditMode || ocrManager.showOverlay) {
       return;
     }
 
@@ -215,7 +219,7 @@
   ondblclick={onZoom}
   onmousemove={handleImageMouseMove}
   onmouseleave={handleImageMouseLeave}
-  use:zoomImageAction={{ disabled: isFaceEditMode.value || ocrManager.showOverlay }}
+  use:zoomImageAction={{ disabled: assetViewerManager.isFaceEditMode || ocrManager.showOverlay }}
   {...useSwipe((event) => onSwipe?.(event))}
 >
   <AdaptiveImage
@@ -265,7 +269,7 @@
     {/snippet}
   </AdaptiveImage>
 
-  {#if isFaceEditMode.value && assetViewerManager.imgRef}
+  {#if assetViewerManager.isFaceEditMode && assetViewerManager.imgRef}
     <FaceEditor htmlElement={assetViewerManager.imgRef} {containerWidth} {containerHeight} assetId={asset.id} />
   {/if}
 </div>
