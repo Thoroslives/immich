@@ -1007,6 +1007,8 @@
   "editor_edits_applied_success": "Modifiche applicate con successo",
   "editor_flip_horizontal": "Capovolgi in orizzontale",
   "editor_flip_vertical": "Capovolgi in verticale",
+  "editor_handle_corner": "angolo {corner, select, top_left {Alto a sinistra} top_right {Alto a destra} bottom_left {Basso a sinistra} bottom_right {Basso a destra} other {A}}",
+  "editor_handle_edge": "bordo {edge, select, top {Alto} bottom {Basso} left {Sinistro} right {Destro} other {Altro}}",
   "editor_orientation": "Orientamento",
   "editor_reset_all_changes": "Annulla modifiche",
   "editor_rotate_left": "Ruota di 90° antiorario",
